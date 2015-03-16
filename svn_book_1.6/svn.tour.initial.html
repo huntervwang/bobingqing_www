@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>3. 创建工作副本</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.76.1" />
+    <link rel="home" href="index.html" title="Version Control with Subversion" />
+    <link rel="up" href="svn.tour.html" title="第 2 章 基本使用" />
+    <link rel="prev" href="svn.tour.importing.html" title="2. 导入数据到你的版本库" />
+    <link rel="next" href="svn.tour.cycle.html" title="4. 基本的工作循环" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">3. 创建工作副本</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="svn.tour.importing.html">上一页</a> </td>
+          <th width="60%" align="center">第 2 章 基本使用</th>
+          <td width="20%" align="right"> <a accesskey="n" href="svn.tour.cycle.html">下一页</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="sect1" title="3. 创建工作副本">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="svn.tour.initial"></a>3. 创建工作副本</h2>
+          </div>
+        </div>
+      </div>
+      <a id="idp7342752" class="indexterm"></a>
+      <p>Most of the time, you will start using a Subversion repository by performing
+a <em class="firstterm">checkout</em> of your project.  Checking out a directory
+from a repository creates a working copy of that directory on your local
+machine.  Unless otherwise specified, this copy contains the youngest (that
+is, most recently created or modified) versions of the directory and its
+children found in the Subversion repository:</p>
+      <div class="informalexample">
+        <pre class="screen">
+$ svn checkout http://svn.example.com/svn/repo/trunk
+A    trunk/README
+A    trunk/INSTALL
+A    trunk/src/main.c
+A    trunk/src/header.h
+…
+Checked out revision 8810.
+$
+</pre>
+      </div>
+      <p>Although the preceding example checks out the trunk directory, you can just
+as easily check out a deeper subdirectory of a repository by specifying that
+subdirectory's URL as the checkout URL:</p>
+      <div class="informalexample">
+        <pre class="screen">
+$ svn checkout http://svn.example.com/svn/repo/trunk/src
+A    src/main.c
+A    src/header.h
+A    src/lib/helpers.c
+…
+Checked out revision 8810.
+$
+</pre>
+      </div>
+      <p>Since Subversion uses a copy-modify-merge model instead of
+lock-modify-unlock (see <a class="xref" href="svn.basic.version-control-basics.html#svn.basic.vsn-models" title="1.3. 版本模型">第 1.3 节 “版本模型”</a>), you can
+immediately make changes to the files and directories in your working copy.
+Your working copy is just like any other collection of files and directories
+on your system.  You can edit the files inside it, rename it, even delete
+the entire working copy and forget about it.</p>
+      <div class="warning" title="警告" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Warning">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[警告]" src="images/warning.png" />
+            </td>
+            <th align="left">警告</th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>因为你的工作副本<span class="quote">“<span class="quote">同你系统上的文件和目录没有任何区别</span>”</span>，你可以随意修改文件，但是你必须告诉 Subversion
+你做的<span class="emphasis"><em>其他任何事</em></span>。例如，你希望拷贝或移动工作副本的一个文件，你应该使用 <span class="command"><strong>svn
+copy</strong></span> 或者 <span class="command"><strong>svn move</strong></span>，而不要使用操作系统的拷贝移动命令，我们会在本章后面详细介绍。</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p>除非你准备好了提交一个新文件或目录，或改变了已存在的，否则没有必要通知Subversion你做了什么。</p>
+      <div class="sidebar" title="目录 .svn 中有什么？">
+        <div class="titlepage">
+          <div>
+            <div>
+              <p class="title">
+                <strong>目录 .svn 中有什么？</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+        <p>Every directory in a working copy contains an administrative area—a
+subdirectory named <code class="filename">.svn</code>.  Usually, directory listing
+commands won't show this subdirectory, but it is nevertheless an important
+directory.  Whatever you do, don't delete or change anything in the
+administrative area! Subversion uses that directory and its contents to
+manage your working copy.</p>
+        <p>如果你不小心删除了子目录 <code class="filename">.svn</code>，最简单的解决办法是删除包含的目录(普通的文件系统删除，而不是
+<span class="command"><strong>svn delete</strong></span>)，然后在父目录运行 <span class="command"><strong>svn
+update</strong></span>，Subversion 客户端会重新下载你删除的目录，并包含新的 <code class="filename">.svn</code>。</p>
+      </div>
+      <p>Notice that in the previous pair of examples, Subversion chose to create a
+working copy in a directory named for the final component of the checkout
+URL.  This occurs only as a convenience to the user when the checkout URL is
+the only bit of information provided to the <span class="command"><strong>svn checkout</strong></span>
+command.  Subversion's command-line client gives you additional flexibility,
+though, allowing you to optionally specify the local directory name that
+Subversion should use for the working copy it creates.  For example:</p>
+      <div class="informalexample">
+        <pre class="screen">
+$ svn checkout http://svn.example.com/svn/repo/trunk my-working-copy
+A    my-working-copy/README
+A    my-working-copy/INSTALL
+A    my-working-copy/src/main.c
+A    my-working-copy/src/header.h
+…
+Checked out revision 8810.
+$
+</pre>
+      </div>
+      <p>If the local directory you specify doesn't yet exist, that's
+okay—<span class="command"><strong>svn checkout</strong></span> will create it for you.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="svn.tour.importing.html">上一页</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="svn.tour.html">上一级</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="svn.tour.cycle.html">下一页</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">2. 导入数据到你的版本库 </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">起始页</a>
+          </td>
+          <td width="40%" align="right" valign="top"> 4. 基本的工作循环</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

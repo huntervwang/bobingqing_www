@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>1. 版本号现在不同了</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.76.1" />
+    <link rel="home" href="index.html" title="Version Control with Subversion" />
+    <link rel="up" href="svn.forcvs.html" title="附录 B. CVS 用户的 Subversion 指南" />
+    <link rel="prev" href="svn.forcvs.html" title="附录 B. CVS 用户的 Subversion 指南" />
+    <link rel="next" href="svn.forcvs.directories.html" title="2. 目录的版本" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">1. 版本号现在不同了</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="svn.forcvs.html">上一页</a> </td>
+          <th width="60%" align="center">附录 B. CVS 用户的 Subversion 指南</th>
+          <td width="20%" align="right"> <a accesskey="n" href="svn.forcvs.directories.html">下一页</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="sect1" title="1. 版本号现在不同了">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="svn.forcvs.revnums"></a>1. 版本号现在不同了</h2>
+          </div>
+        </div>
+      </div>
+      <p>在 CVS 中，版本号是针对每个文件的，这是因为 CVS 使用 RCS 文件保存数据，每个文件都在版本库有一个对应的 RCS
+文件，版本库几乎就是根据项目树的结构创建。</p>
+      <p>在 Subversion
+中，版本库看起来像是一个单独的文件系统，每次提交导致一个新的文件系统树；本质上，版本库是一系列树，每棵树都有一个版本号。当有人谈论<span class="quote">“<span class="quote">版本
+54</span>”</span> 时，他们是在讨论一个特定的树(并且间接来说，文件系统在提交 54 次之后的样子)。</p>
+      <p>技术上讲，谈论<span class="quote">“<span class="quote">文件 <code class="filename">foo.c</code> 的版本 5</span>”</span> 是不正确的，相反，一个人会说
+<span class="quote">“<span class="quote"><code class="filename">foo.c</code> 在版本 5 出现</span>”</span>。同样，我们在假定文件的进展时也要小心，在 CVS
+中，文件 <code class="filename">foo.c</code> 的版本 5 和 6 一定是不同的，在 Subversion
+中，<code class="filename">foo.c</code> 可能在修订版本 5 和 6 之间<span class="emphasis"><em>没有</em></span>改变。</p>
+      <p>Similarly, in CVS, a tag or branch is an annotation on the file or on the
+version information for that individual file, whereas in Subversion, a tag
+or branch is a copy of an entire tree (by convention, into the
+<code class="filename">/branches</code> or <code class="filename">/tags</code> directories
+that appear at the top level of the repository, beside
+<code class="filename">/trunk</code>).  In the repository as a whole, many versions
+of each file may be visible: the latest version on each branch, every tagged
+version, and of course the latest version on the trunk itself.  So, to
+refine the terms even further, one would often say
+<span class="quote">“<span class="quote"><code class="filename">foo.c</code> as it appears in
+<code class="filename">/branches/REL1</code> in revision 5.</span>”</span></p>
+      <p>关于此专题的更多细节，请参见<a class="xref" href="svn.basic.in-action.html#svn.basic.in-action.revs" title="2.2. 修订版本">第 2.2 节 “修订版本”</a>。</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="svn.forcvs.html">上一页</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="svn.forcvs.html">上一级</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="svn.forcvs.directories.html">下一页</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">附录 B. CVS 用户的 Subversion 指南 </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">起始页</a>
+          </td>
+          <td width="40%" align="right" valign="top"> 2. 目录的版本</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

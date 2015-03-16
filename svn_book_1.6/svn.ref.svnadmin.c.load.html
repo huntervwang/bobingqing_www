@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>svnadmin load</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.76.1" />
+    <link rel="home" href="index.html" title="Version Control with Subversion" />
+    <link rel="up" href="svn.ref.svnadmin.html#svn.ref.svnadmin.c" title="2.2. svnadmin 子命令" />
+    <link rel="prev" href="svn.ref.svnadmin.c.list-unused-dblogs.html" title="svnadmin list-unused-dblogs" />
+    <link rel="next" href="svn.ref.svnadmin.c.lslocks.html" title="svnadmin lslocks" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">svnadmin load</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="svn.ref.svnadmin.c.list-unused-dblogs.html">上一页</a> </td>
+          <th width="60%" align="center">2.2. svnadmin 子命令</th>
+          <td width="20%" align="right"> <a accesskey="n" href="svn.ref.svnadmin.c.lslocks.html">下一页</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry" title="svnadmin load">
+      <a id="svn.ref.svnadmin.c.load"></a>
+      <div class="titlepage"></div>
+      <a id="idp13240880" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>名称</h2>
+        <p>svnadmin load — Read a repository dump stream from <code class="filename">stdin</code>.</p>
+      </div>
+      <div class="refsect1" title="概要">
+        <a id="idp13244544"></a>
+        <h2>概要</h2>
+        <p>
+          <code class="literal">svnadmin load REPOS_PATH</code>
+        </p>
+      </div>
+      <div class="refsect1" title="描述">
+        <a id="idp13246176"></a>
+        <h2>描述</h2>
+        <p>Read a repository dump stream from <code class="filename">stdin</code>, committing
+new revisions into the repository's filesystem.  Send progress feedback to
+<code class="filename">stdout</code>.</p>
+      </div>
+      <div class="refsect1" title="选项">
+        <a id="idp13248896"></a>
+        <h2>选项</h2>
+        <div class="informalexample">
+          <pre class="screen">
+--force-uuid
+--ignore-uuid
+--parent-dir
+--quiet (-q)
+--use-post-commit-hook
+--use-pre-commit-hook
+</pre>
+        </div>
+      </div>
+      <div class="refsect1" title="例子">
+        <a id="idp13250848"></a>
+        <h2>例子</h2>
+        <p>这里显示了加载一个备份文件到版本库(当然，使用<span class="command"><strong>svnadmin dump</strong></span>)：</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnadmin load /var/svn/restored &lt; repos-backup
+&lt;&lt;&lt; Started new txn, based on original revision 1
+     * adding path : test ... done.
+     * adding path : test/a ... done.
+…
+</pre>
+        </div>
+        <p>或者你希望加载到一个子目录：</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnadmin load --parent-dir new/subdir/for/project \
+                /var/svn/restored &lt; repos-backup
+&lt;&lt;&lt; Started new txn, based on original revision 1
+     * adding path : test ... done.
+     * adding path : test/a ... done.
+…
+</pre>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="svn.ref.svnadmin.c.list-unused-dblogs.html">上一页</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="svn.ref.svnadmin.html#svn.ref.svnadmin.c">上一级</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="svn.ref.svnadmin.c.lslocks.html">下一页</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">svnadmin list-unused-dblogs </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">起始页</a>
+          </td>
+          <td width="40%" align="right" valign="top"> svnadmin lslocks</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

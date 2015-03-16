@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>第 5 章 版本库管理</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.76.1" />
+    <link rel="home" href="index.html" title="Version Control with Subversion" />
+    <link rel="up" href="index.html" title="Version Control with Subversion" />
+    <link rel="prev" href="svn.branchmerge.summary.html" title="10. 总结" />
+    <link rel="next" href="svn.reposadmin.basics.html" title="1. Subversion 版本库的定义" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">第 5 章 版本库管理</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="svn.branchmerge.summary.html">上一页</a> </td>
+          <th width="60%" align="center"> </th>
+          <td width="20%" align="right"> <a accesskey="n" href="svn.reposadmin.basics.html">下一页</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="chapter" title="第 5 章 版本库管理">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title"><a id="svn.reposadmin"></a>第 5 章 版本库管理</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <p>
+          <strong>目录</strong>
+        </p>
+        <dl>
+          <dt>
+            <span class="sect1">
+              <a href="svn.reposadmin.basics.html">1. Subversion 版本库的定义</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="svn.reposadmin.planning.html">2. 版本库开发策略</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.reposadmin.planning.html#svn.reposadmin.projects.chooselayout">2.1. 规划你的版本库结构</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.reposadmin.planning.html#svn.reposadmin.basics.hosting">2.2. 决定在哪里与如何部署你的版本库</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.reposadmin.planning.html#svn.reposadmin.basics.backends">2.3. 选择数据存储格式</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.reposadmin.planning.html#svn.reposadmin.basics.backends.bdb">2.3.1. Berkeley DB</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.reposadmin.planning.html#svn.reposadmin.basics.backends.fsfs">2.3.2. FSFS</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="svn.reposadmin.create.html">3. 创建和配置你的版本库</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.reposadmin.create.html#svn.reposadmin.basics.creating">3.1. 创建版本库</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.reposadmin.create.html#svn.reposadmin.create.hooks">3.2. 实现版本库钩子</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.reposadmin.create.html#svn.reposadmin.create.bdb">3.3. Berkeley DB 配置</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.reposadmin.create.html#svn.reposadmin.create.fsfs">3.4. FSFS 配置</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="svn.reposadmin.maint.html">4. 版本库维护</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.tk">4.1. 管理员的工具箱</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.tk.svnadmin">4.1.1. svnadmin</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.tk.svnlook">4.1.2. svnlook</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.tk.svndumpfilter">4.1.3. svndumpfilter</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.tk.svnsync">4.1.4. svnsync</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.tk.fsfsreshard">4.1.5. fsfs-reshard.py</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.tk.bdbutil">4.1.6. Berkeley DB 工具</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.setlog">4.2. 修正提交消息</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.diskspace">4.3. 管理磁盘空间</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.diskspace.deltas">4.3.1. 让 Subversion 节约磁盘空间</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.diskspace.deadtxns">4.3.2. 删除终止的事务</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.diskspace.bdblogs">4.3.3. 删除不使用的 Berkeley DB 日志文件</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.diskspace.fsfspacking">4.3.4. 打包 FSFS 文件系统</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.recovery">4.4. Berkeley DB 恢复</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.migrate">4.5. 版本库数据的移植</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.filtering">4.6. 过滤版本库历史</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.replication">4.7. 版本库复制</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.backup">4.8. 版本库备份</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.uuids">4.9. 管理版本库的 UUID</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="svn.reposadmin.maint.moving-and-removing.html">5. 移动和删除版本库</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="svn.reposadmin.summary.html">6. 总结</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <p>The Subversion repository is the central storehouse of all your versioned
+data.  As such, it becomes an obvious candidate for all the love and
+attention an administrator can offer.  While the repository is generally a
+low-maintenance item, it is important to understand how to properly
+configure and care for it so that potential problems are avoided, and so
+actual problems are safely resolved.</p>
+      <p>In this chapter, we'll discuss how to create and configure a Subversion
+repository.  We'll also talk about repository maintenance, providing
+examples of how and when to use the <span class="command"><strong>svnlook</strong></span> and
+<span class="command"><strong>svnadmin</strong></span> tools provided with Subversion.  We'll address
+some common questions and mistakes and give some suggestions on how to
+arrange the data in the repository.</p>
+      <p>If you plan to access a Subversion repository only in the role of a user
+whose data is under version control (i.e., via a Subversion client), you can
+skip this chapter altogether.  However, if you are, or wish to become, a
+Subversion repository administrator,<sup>[<a id="idp9589952" href="#ftn.idp9589952" class="footnote">30</a>]</sup>
+this chapter is for you.</p>
+      <div class="footnotes">
+        <br />
+        <hr width="100" align="left" />
+        <div class="footnote">
+          <p><sup>[<a id="ftn.idp9589952" href="#idp9589952" class="para">30</a>] </sup>这可能听起来很崇高， 但我们所指的只是那些对管理别人工作副本数据之外的神秘领域感兴趣的人。</p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="svn.branchmerge.summary.html">上一页</a> </td>
+          <td width="20%" align="center"> </td>
+          <td width="40%" align="right"> <a accesskey="n" href="svn.reposadmin.basics.html">下一页</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">10. 总结 </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">起始页</a>
+          </td>
+          <td width="40%" align="right" valign="top"> 1. Subversion 版本库的定义</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

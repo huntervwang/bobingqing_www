@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>2. 自动版本化</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.76.1" />
+    <link rel="home" href="index.html" title="Version Control with Subversion" />
+    <link rel="up" href="svn.webdav.html" title="附录 C. WebDAV 和自动版本" />
+    <link rel="prev" href="svn.webdav.basic.html" title="1. 什么是 WebDAV？" />
+    <link rel="next" href="svn.webdav.clients.html" title="3. 客户端交互性" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">2. 自动版本化</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="svn.webdav.basic.html">上一页</a> </td>
+          <th width="60%" align="center">附录 C. WebDAV 和自动版本</th>
+          <td width="20%" align="right"> <a accesskey="n" href="svn.webdav.clients.html">下一页</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="sect1" title="2. 自动版本化">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="svn.webdav.autoversioning"></a>2. 自动版本化</h2>
+          </div>
+        </div>
+      </div>
+      <p>因为 Subversion 客户端不是完整的 DeltaV 客户端，Subversion 服务器也不是完整的 DeltaV
+服务器，但仍有值得高兴的交互特性：叫做<em class="firstterm">自动版本化</em>。</p>
+      <p>自动版本化是 DeltaV 标准中的可选特性，一个典型的 DeltaV 服务器会拒绝一个对版本控制之下文件的
+<code class="literal">PUT</code> 操作。为了修改一个版本控制下的文件，服务器只会接受一系列正确的版本请求：例如
+<code class="literal">MKACTIVITY</code>, <code class="literal">CHECKOUT</code>,
+<code class="literal">PUT</code> 和 <code class="literal">CHECKIN</code>。但是如果 DeltaV
+服务器支持自动版本化，服务器会接受基本 WebDAV
+客户端的写请求。服务器的行为就像客户端<span class="emphasis"><em>已经</em></span>发出了一些列正确的版本请求，执行了提交。也就是说，DeltaV
+服务器可以与一个对版本化一无所知的普通 WebDAV 客户端交互。</p>
+      <p>因为有许多操作系统已经集成了 WebDAV 客户端，所以这个特性的用例适用于管理员与非技术用户一起工作。假设一个办公室有许多使用 Microsoft
+Windows 或 Mac OS 的普通用户。每个用户<span class="quote">“<span class="quote">装载</span>”</span>了一个 Subversion
+版本库，看起来就是普通的网络共享文件夹。他们操作这个目录就像普通目录一样：打开文件,
+编辑它们，保存它们。同时，服务器自动的版本化所有东西。任何管理员(或博学的用户)可以一直使用 Subversion 客户端来查询历史来检索旧版本的数据。</p>
+      <p>This scenario isn't fiction—it's real and it works.  To activate
+autoversioning in <span class="command"><strong>mod_dav_svn</strong></span>, use the
+<code class="literal">SVNAutoversioning</code> directive within the
+<code class="filename">httpd.conf</code> <code class="literal">Location</code> block, like so:</p>
+      <div class="informalexample">
+        <pre class="programlisting">
+&lt;Location /repos&gt;
+  DAV svn
+  SVNPath /var/svn/repository
+  SVNAutoversioning on
+&lt;/Location&gt;
+</pre>
+      </div>
+      <p>当激活了 Subversion 自动版本化，来自 WebDAV 的客户端请求会导致自动提交，每个修订版本会自动附加一个通用的日志信息。</p>
+      <p>然而，在激活这个特性之前，需要理解你做的事情。WebDAV
+会做<span class="emphasis"><em>许多</em></span>写请求，导致产生数量非常巨大的自动提交版本。例如，当保存数据时，许多客户端会使用一个
+<code class="literal">PUT</code> 请求来创建一个 0 字节的文件，然后紧跟一个 <code class="literal">PUT</code>
+请求写真实的文件数据。一个单独的文件写操作产生了两个不同的提交。考虑到许多应用程序隔几分钟的自动保存，这会产生更多的提交。</p>
+      <p>如果你有发送邮件的 post-commit
+钩子程序，你可能想完全禁止发送邮件，或者只针对部分目录发送邮件；它依赖于你认为大量的邮件通知是否还有价值。另外，一个聪明的 post-commit
+钩子也应该能够区分自动版本化和 <span class="command"><strong>svn commit</strong></span> 产生的事务。技巧就是检查修订版本的
+<code class="literal">svn:autoversioned</code> 属性。如果有，则提交来自一个原始的 WebDAV 客户端。</p>
+      <p>Another feature that may be a useful complement for Subversion's
+autoversioning comes from Apache's <code class="literal">mod_mime</code> module.  If a
+WebDAV client adds a new file to the repository, there's no opportunity for
+the user to set the the <code class="literal">svn:mime-type</code> property.  This
+might cause the file to appear as a generic icon when viewed within a WebDAV
+shared folder, not having an association with any application.  One remedy
+is to have a sysadmin (or other Subversion-knowledgeable person) check out a
+working copy and manually set the <code class="literal">svn:mime-type</code> property
+on necessary files.  But there's potentially no end to such cleanup tasks.
+Instead, you can use the <code class="literal">ModMimeUsePathInfo</code> directive in
+your Subversion <code class="literal">&lt;Location&gt;</code> block:</p>
+      <div class="informalexample">
+        <pre class="programlisting">
+&lt;Location /repos&gt;
+  DAV svn
+  SVNPath /var/svn/repository
+  SVNAutoversioning on
+
+  ModMimeUsePathInfo on
+
+&lt;/Location&gt;
+</pre>
+      </div>
+      <p>这个指示允许 <code class="literal">mod_mime</code> 在使用自动版本化添加新文件时，尝试自动检测新文件的 MIME
+类型。这个模块查看文件的扩展名，有可能的话还包括检查内容；如果文件符合某个通用模式，就会自动设置文件的属性
+<code class="literal">svn:mime-type</code>。</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="svn.webdav.basic.html">上一页</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="svn.webdav.html">上一级</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="svn.webdav.clients.html">下一页</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">1. 什么是 WebDAV？ </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">起始页</a>
+          </td>
+          <td width="40%" align="right" valign="top"> 3. 客户端交互性</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

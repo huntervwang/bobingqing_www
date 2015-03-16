@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>第 3 章 高级主题</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.76.1" />
+    <link rel="home" href="index.html" title="Version Control with Subversion" />
+    <link rel="up" href="index.html" title="Version Control with Subversion" />
+    <link rel="prev" href="svn.tour.summary.html" title="8. 总结" />
+    <link rel="next" href="svn.tour.revs.specifiers.html" title="1. 版本清单" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">第 3 章 高级主题</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="svn.tour.summary.html">上一页</a> </td>
+          <th width="60%" align="center"> </th>
+          <td width="20%" align="right"> <a accesskey="n" href="svn.tour.revs.specifiers.html">下一页</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="chapter" title="第 3 章 高级主题">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title"><a id="svn.advanced"></a>第 3 章 高级主题</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <p>
+          <strong>目录</strong>
+        </p>
+        <dl>
+          <dt>
+            <span class="sect1">
+              <a href="svn.tour.revs.specifiers.html">1. 版本清单</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.tour.revs.specifiers.html#svn.tour.revs.keywords">1.1. 修订版本关键字</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.tour.revs.specifiers.html#svn.tour.revs.dates">1.2. 版本日期</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="svn.advanced.pegrevs.html">2. Peg 和实施修订版本</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="svn.advanced.props.html">3. 属性</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.advanced.props.html#svn.advanced.props.why">3.1. 为什么需要属性？</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.advanced.props.html#svn.advanced.props.manip">3.2. 操作属性</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.advanced.props.html#svn.advanced.props.workflow">3.3. 属性和 Subversion 工作流程</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.advanced.props.html#svn.advanced.props.auto">3.4. 自动设置属性</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="svn.advanced.props.file-portability.html">4. 文件移植性</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.advanced.props.file-portability.html#svn.advanced.props.special.mime-type">4.1. 文件内容类型</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.advanced.props.file-portability.html#svn.advanced.props.special.executable">4.2. 文件的可执行性</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.advanced.props.file-portability.html#svn.advanced.props.special.eol-style">4.3. 行结束字符序列</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="svn.advanced.props.special.ignore.html">5. 忽略未版本控制的条目</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="svn.advanced.props.special.keywords.html">6. 关键字替换</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="svn.advanced.sparsedirs.html">7. 稀疏目录</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="svn.advanced.locking.html">8. 锁定</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.advanced.locking.html#svn.advanced.locking.creation">8.1. 创建锁定</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.advanced.locking.html#svn.advanced.locking.discovery">8.2. 发现锁定</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.advanced.locking.html#svn.advanced.locking.break-steal">8.3. 解除和偷窃锁定</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.advanced.locking.html#svn.advanced.locking.lock-communication">8.4. 锁定交流</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="svn.advanced.externals.html">9. 外部定义</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="svn.advanced.changelists.html">10. 修改列表</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.advanced.changelists.html#svn.advanced.changelists.creating">10.1. 创建和更新修改列表</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.advanced.changelists.html#svn.advanced.changelists.asfilters">10.2. 用修改列表作为操作过滤器</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.advanced.changelists.html#svn.advanced.changelists.limitations">10.3. 修改列表的限制</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="svn.serverconfig.netmodel.html">11. 网络模型</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.serverconfig.netmodel.html#svn.serverconfig.netmodel.reqresp">11.1. 请求和响应</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.serverconfig.netmodel.html#svn.serverconfig.netmodel.creds">11.2. 客户端凭证</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.serverconfig.netmodel.html#svn.serverconfig.netmodel.credcache">11.2.1. 缓存凭证</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.serverconfig.netmodel.html#svn.tour.initial.disabling-password-caching">11.2.2. 禁用密码缓存</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.serverconfig.netmodel.html#svn.tour.initial.authn-cache-purge">11.2.3. 删除缓存的凭证</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.serverconfig.netmodel.html#svn.tour.initial.different-user">11.2.4. 命令行认证</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.serverconfig.netmodel.html#svn.tour.initial.authn-wrapup">11.2.5. 认证总结</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="svn.advanced.summary.html">12. 总结</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <p>If you've been reading this book chapter by chapter, from start to finish,
+you should by now have acquired enough knowledge to use the Subversion
+client to perform the most common version control operations.  You
+understand how to check out a working copy from a Subversion repository.
+You are comfortable with submitting and receiving changes using the
+<span class="command"><strong>svn commit</strong></span> and <span class="command"><strong>svn update</strong></span> operations.
+You've probably even developed a reflex that causes you to run the
+<span class="command"><strong>svn status</strong></span> command almost unconsciously.  For all intents
+and purposes, you are ready to use Subversion in a typical environment.</p>
+      <p>但是Subversion的特性并没有止于<span class="quote">“<span class="quote">普通的版本控制操作</span>”</span>，它也有一些超越了与版本库传递文件和目录修改以外的功能。</p>
+      <p>This chapter highlights some of Subversion's features that, while important,
+may not be part of the typical user's daily routine.  It assumes that you
+are familiar with Subversion's basic file and directory versioning
+capabilities.  If you aren't, you'll want to first read <a class="xref" href="svn.basic.html" title="第 1 章 基本概念">第 1 章 <em>基本概念</em></a> and <a class="xref" href="svn.tour.html" title="第 2 章 基本使用">第 2 章 <em>基本使用</em></a>.  Once you've
+mastered those basics and consumed this chapter, you'll be a Subversion
+power user!</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="svn.tour.summary.html">上一页</a> </td>
+          <td width="20%" align="center"> </td>
+          <td width="40%" align="right"> <a accesskey="n" href="svn.tour.revs.specifiers.html">下一页</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">8. 总结 </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">起始页</a>
+          </td>
+          <td width="40%" align="right" valign="top"> 1. 版本清单</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

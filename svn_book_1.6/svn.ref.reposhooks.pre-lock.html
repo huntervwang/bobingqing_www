@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>pre-lock</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.76.1" />
+    <link rel="home" href="index.html" title="Version Control with Subversion" />
+    <link rel="up" href="svn.ref.reposhooks.html" title="11. 版本库钩子" />
+    <link rel="prev" href="svn.ref.reposhooks.post-revprop-change.html" title="post-revprop-change" />
+    <link rel="next" href="svn.ref.reposhooks.post-lock.html" title="post-lock" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">pre-lock</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="svn.ref.reposhooks.post-revprop-change.html">上一页</a> </td>
+          <th width="60%" align="center">11. 版本库钩子</th>
+          <td width="20%" align="right"> <a accesskey="n" href="svn.ref.reposhooks.post-lock.html">下一页</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry" title="pre-lock">
+      <a id="svn.ref.reposhooks.pre-lock"></a>
+      <div class="titlepage"></div>
+      <a id="idp14231312" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>名称</h2>
+        <p>pre-lock — 路径锁定尝试的通知。</p>
+      </div>
+      <div class="refsect1" title="描述">
+        <a id="idp14234272"></a>
+        <h2>描述</h2>
+        <p><code class="literal">pre-lock</code>
+钩子在每次有人尝试锁定文件时执行。可以防止完全锁定，或者用来创建控制哪些用户可以锁定哪些路径的复杂策略。如果钩子发现已存在锁，也可以决定是否允许用户<span class="quote">“<span class="quote">窃取</span>”</span>这个锁。</p>
+        <p>如果 <code class="literal">pre-lock</code> 钩子返回非零值，锁定动作会终止，任何输出到
+<code class="filename">stderr</code> 的内容都会返回到客户端。</p>
+        <p>The hook program may optionally dictate the lock token which will be
+assigned to the lock by printing the desired lock token to standard output.
+Because of this, implementations of this hook should carefully avoid
+unexpected output sent to standard output.</p>
+        <div class="warning" title="警告" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Warning">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[警告]" src="images/warning.png" />
+              </td>
+              <th align="left">警告</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>If the <code class="literal">pre-lock</code> script takes advantage of lock token
+dictation feature, the responsibility of generating a
+<span class="emphasis"><em>unique</em></span> lock token falls to the script itself.  Failure
+to generate unique lock tokens may result in undefined—and very
+likely, undesired—behavior.</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1" title="输入参数">
+        <a id="idp14241936"></a>
+        <h2>输入参数</h2>
+        <p>传递给你钩子程序的命令行参数，按照顺序是：</p>
+        <div class="orderedlist">
+          <ol class="orderedlist" type="1">
+            <li class="listitem">
+              <p>版本库路径</p>
+            </li>
+            <li class="listitem">
+              <p>将要锁定的版本化路径</p>
+            </li>
+            <li class="listitem">
+              <p>尝试锁定的认证用户名</p>
+            </li>
+            <li class="listitem">
+              <p>Comment provided when the lock was created</p>
+            </li>
+            <li class="listitem">
+              <p><code class="literal">1</code> if the user is attempting to steal an existing lock;
+<code class="literal">0</code> otherwise</p>
+            </li>
+          </ol>
+        </div>
+      </div>
+      <div class="refsect1" title="普通用户">
+        <a id="idp14249360"></a>
+        <h2>普通用户</h2>
+        <p>访问控制</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="svn.ref.reposhooks.post-revprop-change.html">上一页</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="svn.ref.reposhooks.html">上一级</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="svn.ref.reposhooks.post-lock.html">下一页</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">post-revprop-change </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">起始页</a>
+          </td>
+          <td width="40%" align="right" valign="top"> post-lock</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

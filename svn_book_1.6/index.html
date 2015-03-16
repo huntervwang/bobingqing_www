@@ -1,0 +1,2590 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Version Control with Subversion</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.76.1" />
+    <link rel="home" href="index.html" title="Version Control with Subversion" />
+    <link rel="next" href="svn.foreword.html" title="前言" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Version Control with Subversion</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"> </td>
+          <th width="60%" align="center"> </th>
+          <td width="20%" align="right"> <a accesskey="n" href="svn.foreword.html">下一页</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="book" title="Version Control with Subversion">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h1 class="title"><a id="svn"></a>Version Control with Subversion</h1>
+          </div>
+          <div>
+            <h2 class="subtitle">针对 Subversion 1.6</h2>
+          </div>
+          <div>
+            <h2 class="subtitle">(编译自 r3821/r4960)</h2>
+          </div>
+          <div>
+            <div class="authorgroup">
+              <div class="author">
+                <h3 class="author"><span class="firstname">Ben</span> <span class="surname">Collins-Sussman</span></h3>
+              </div>
+              <div class="author">
+                <h3 class="author"><span class="firstname">Brian W.</span> <span class="surname">Fitzpatrick</span></h3>
+              </div>
+              <div class="author">
+                <h3 class="author"><span class="firstname">C. Michael</span> <span class="surname">Pilato</span></h3>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p class="copyright">版权 © 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011 Ben Collins-Sussman, Brian W. Fitzpatrick, C. Michael Pilato</p>
+          </div>
+          <div>
+            <div class="legalnotice" title="法律通告">
+              <a id="idp252272"></a>
+              <p>本书使用创作共用许可证。可以访问 <a class="ulink" href="http://creativecommons.org/licenses/by/2.0/" target="_top">http://creativecommons.org/licenses/by/2.0/</a>
+或发送邮件到 Creative Commons, 559 Nathan Abbott Way, Stanford, California 94305,
+USA，以查看本许可证。</p>
+            </div>
+          </div>
+          <div>
+            <p class="pubdate">(TBA)</p>
+          </div>
+        </div>
+        <hr />
+      </div>
+      <div class="toc">
+        <p>
+          <strong>目录</strong>
+        </p>
+        <dl>
+          <dt>
+            <span class="preface">
+              <a href="svn.foreword.html">前言</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="preface">
+              <a href="svn.preface.html">序言</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.intro.whatis.html">1. Subversion 是什么？</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.intro.whatis.html#svn.intro.righttool">1.1. Subversion 是正确的工具吗？</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.intro.whatis.html#svn.intro.history">1.2. Subversion 的历史</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.intro.whatis.html#svn.intro.architecture">1.3. Subversion 的架构</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.intro.whatis.html#svn.intro.components">1.4. Subversion 的组件</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.intro.whatis.html#svn.intro.whatsnew">1.5. Subversion 有什么新东西？</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.preface.audience.html">2. 读者</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.preface.howread.html">3. 怎样阅读本书</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.preface.organization.html">4. 本书的结构</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.preface.free.html">5. 本书是免费的</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.preface.acks.html">6. 致谢</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="chapter">
+              <a href="svn.basic.html">1. 基本概念</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.basic.version-control-basics.html">1. 版本控制基础概念</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.basic.version-control-basics.html#svn.basic.repository">1.1. 版本库</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.basic.version-control-basics.html#svn.basic.working-copy">1.2. 工作副本</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.basic.version-control-basics.html#svn.basic.vsn-models">1.3. 版本模型</a>
+                    </span>
+                  </dt>
+                  <dd>
+                    <dl>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.basic.version-control-basics.html#svn.basic.vsn-models.problem-sharing">1.3.1. 文件共享的问题</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.basic.version-control-basics.html#svn.basic.vsn-models.lock-unlock">1.3.2. “锁定-修改-解锁”方案</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.basic.version-control-basics.html#svn.basic.vsn-models.copy-merge">1.3.3. “拷贝-修改-合并”方案</a>
+                        </span>
+                      </dt>
+                    </dl>
+                  </dd>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.basic.in-action.html">2. Subversion 的版本控制</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.basic.in-action.html#svn.basic.svn-repositories">2.1. Subversion 版本库</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.basic.in-action.html#svn.basic.in-action.revs">2.2. 修订版本</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.basic.in-action.html#svn.advanced.reposurls">2.3. 版本库的地址</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.basic.in-action.html#svn.basic.in-action.wc">2.4. Subversion 的工作副本</a>
+                    </span>
+                  </dt>
+                  <dd>
+                    <dl>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.basic.in-action.html#svn.basic.in-action.track-repos">2.4.1. 工作副本的工作方式</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.basic.in-action.html#svn.basic.in-action.wc-funcdamentals">2.4.2. 工作副本基本交互操作</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.basic.in-action.html#svn.basic.in-action.mixedrevs">2.4.3. 混合版本的工作副本</a>
+                        </span>
+                      </dt>
+                    </dl>
+                  </dd>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.basic.summary.html">3. 总结</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="chapter">
+              <a href="svn.tour.html">2. 基本使用</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.tour.help.html">1. 求助！</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.tour.importing.html">2. 导入数据到你的版本库</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.tour.importing.html#svn.tour.importing.import">2.1. 导入文件和目录</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.tour.importing.html#svn.tour.importing.layout">2.2. 推荐的版本库布局</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.tour.importing.html#svn.tour.importing.naming">2.3. 名称中有什么？</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.tour.initial.html">3. 创建工作副本</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.tour.cycle.html">4. 基本的工作循环</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.tour.cycle.html#svn.tour.cycle.update">4.1. 更新你的工作副本</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.tour.cycle.html#svn.tour.cycle.edit">4.2. 开始修改 </a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.tour.cycle.html#svn.tour.cycle.examine">4.3. 检查你的修改</a>
+                    </span>
+                  </dt>
+                  <dd>
+                    <dl>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.tour.cycle.html#svn.tour.cycle.examine.status">4.3.1. 查看你的修改概况</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.tour.cycle.html#svn.tour.cycle.examine.diff">4.3.2. 检查你的本地修改的详情</a>
+                        </span>
+                      </dt>
+                    </dl>
+                  </dd>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.tour.cycle.html#svn.tour.cycle.revert">4.4. 修正错误</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.tour.cycle.html#svn.tour.cycle.resolve">4.5. 解决冲突</a>
+                    </span>
+                  </dt>
+                  <dd>
+                    <dl>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.tour.cycle.html#svn.tour.cycle.resolve.diff">4.5.1. 交互式的查看冲突区别</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.tour.cycle.html#svn.tour.cycle.resolve.resolve">4.5.2. 交互式的解决冲突区别</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.tour.cycle.html#svn.tour.cycle.resolve.pending">4.5.3. 延后解决冲突</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.tour.cycle.html#svn.tour.cycle.resolve.byhand">4.5.4. 手工合并冲突</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.tour.cycle.html#svn.tour.cycle.resolve.theirsfull">4.5.5. 丢弃你的修改而接收新获取的修订版本</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.tour.cycle.html#svn.tour.cycle.resolve.revert">4.5.6. Punting: using svn revert</a>
+                        </span>
+                      </dt>
+                    </dl>
+                  </dd>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.tour.cycle.html#svn.tour.cycle.commit">4.6. 提交你的修改</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.tour.history.html">5. 检验历史</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.tour.history.html#svn.tour.history.diff">5.1. 检查历史修改详情</a>
+                    </span>
+                  </dt>
+                  <dd>
+                    <dl>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.tour.history.html#svn.tour.history.diff.local">5.1.1. 检查本地修改</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.tour.history.html#svn.tour.history.diff.wcrepos">5.1.2. 比较工作副本和版本库</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.tour.history.html#svn.tour.history.diff.reposrepos">5.1.3. 比较版本库中的版本</a>
+                        </span>
+                      </dt>
+                    </dl>
+                  </dd>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.tour.history.html#svn.tour.history.log">5.2. 产生历史修改列表</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.tour.history.html#svn.tour.history.browsing">5.3. 浏览版本库</a>
+                    </span>
+                  </dt>
+                  <dd>
+                    <dl>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.tour.history.html#svn.tour.history.browsing.cat">5.3.1. svn cat</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.tour.history.html#svn.tour.history.browsing.list">5.3.2. svn list</a>
+                        </span>
+                      </dt>
+                    </dl>
+                  </dd>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.tour.history.html#svn.tour.history.snapshots">5.4. 获得旧的版本库快照</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.tour.cleanup.html">6. 有时你只需要清理</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.tour.cleanup.html#svn.tour.cleanup.disposal">6.1. 处理你的工作副本</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.tour.cleanup.html#svn.tour.cleanup.interruption">6.2. 从中断中恢复</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.tour.treeconflicts.html">7. 处理结构性冲突</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.tour.treeconflicts.html#svn.tour.treeconflicts.example">7.1. An Example Tree Conflict</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.tour.summary.html">8. 总结</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="chapter">
+              <a href="svn.advanced.html">3. 高级主题</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.tour.revs.specifiers.html">1. 版本清单</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.tour.revs.specifiers.html#svn.tour.revs.keywords">1.1. 修订版本关键字</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.tour.revs.specifiers.html#svn.tour.revs.dates">1.2. 版本日期</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.advanced.pegrevs.html">2. Peg 和实施修订版本</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.advanced.props.html">3. 属性</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.advanced.props.html#svn.advanced.props.why">3.1. 为什么需要属性？</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.advanced.props.html#svn.advanced.props.manip">3.2. 操作属性</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.advanced.props.html#svn.advanced.props.workflow">3.3. 属性和 Subversion 工作流程</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.advanced.props.html#svn.advanced.props.auto">3.4. 自动设置属性</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.advanced.props.file-portability.html">4. 文件移植性</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.advanced.props.file-portability.html#svn.advanced.props.special.mime-type">4.1. 文件内容类型</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.advanced.props.file-portability.html#svn.advanced.props.special.executable">4.2. 文件的可执行性</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.advanced.props.file-portability.html#svn.advanced.props.special.eol-style">4.3. 行结束字符序列</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.advanced.props.special.ignore.html">5. 忽略未版本控制的条目</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.advanced.props.special.keywords.html">6. 关键字替换</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.advanced.sparsedirs.html">7. 稀疏目录</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.advanced.locking.html">8. 锁定</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.advanced.locking.html#svn.advanced.locking.creation">8.1. 创建锁定</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.advanced.locking.html#svn.advanced.locking.discovery">8.2. 发现锁定</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.advanced.locking.html#svn.advanced.locking.break-steal">8.3. 解除和偷窃锁定</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.advanced.locking.html#svn.advanced.locking.lock-communication">8.4. 锁定交流</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.advanced.externals.html">9. 外部定义</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.advanced.changelists.html">10. 修改列表</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.advanced.changelists.html#svn.advanced.changelists.creating">10.1. 创建和更新修改列表</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.advanced.changelists.html#svn.advanced.changelists.asfilters">10.2. 用修改列表作为操作过滤器</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.advanced.changelists.html#svn.advanced.changelists.limitations">10.3. 修改列表的限制</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.serverconfig.netmodel.html">11. 网络模型</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.serverconfig.netmodel.html#svn.serverconfig.netmodel.reqresp">11.1. 请求和响应</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.serverconfig.netmodel.html#svn.serverconfig.netmodel.creds">11.2. 客户端凭证</a>
+                    </span>
+                  </dt>
+                  <dd>
+                    <dl>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.serverconfig.netmodel.html#svn.serverconfig.netmodel.credcache">11.2.1. 缓存凭证</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.serverconfig.netmodel.html#svn.tour.initial.disabling-password-caching">11.2.2. 禁用密码缓存</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.serverconfig.netmodel.html#svn.tour.initial.authn-cache-purge">11.2.3. 删除缓存的凭证</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.serverconfig.netmodel.html#svn.tour.initial.different-user">11.2.4. 命令行认证</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.serverconfig.netmodel.html#svn.tour.initial.authn-wrapup">11.2.5. 认证总结</a>
+                        </span>
+                      </dt>
+                    </dl>
+                  </dd>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.advanced.summary.html">12. 总结</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="chapter">
+              <a href="svn.branchmerge.html">4. 分支与合并</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.branchmerge.whatis.html">1. 什么是分支？</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.branchmerge.using.html">2. 使用分支</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.branchmerge.using.html#svn.branchmerge.using.create">2.1. 创建分支</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.branchmerge.using.html#svn.branchmerge.using.work">2.2. 在分支上工作</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.branchmerge.using.html#svn.branchmerge.using.concepts">2.3. 分支背后的关键概念</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.branchmerge.basicmerging.html">3. 基本合并</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.branchmerge.basicmerging.html#svn.branchmerge.changesets">3.1. 变更集</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.branchmerge.basicmerging.html#svn.branchemerge.basicmerging.stayinsync">3.2. 保持分支同步</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.branchmerge.basicmerging.html#svn.branchemerge.basicmerging.reintegrate">3.3. 重新集成分支</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.branchmerge.basicmerging.html#svn.branchmerge.basicmerging.mergeinfo">3.4. 合并信息和预览</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.branchmerge.basicmerging.html#svn.branchmerge.basicmerging.undo">3.5. 取消修改</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.branchmerge.basicmerging.html#svn.branchmerge.basicmerging.resurrect">3.6. 找回删除的项目</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.branchmerge.advanced.html">4. 高级合并</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.branchmerge.advanced.html#svn.branchmerge.cherrypicking">4.1. 摘录合并</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.branchmerge.advanced.html#svn.branchmerge.advanced.advancedsyntax">4.2. 合并的语法：完整的描述</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.branchmerge.advanced.html#svn.branchmerge.nomergedata">4.3. 不使用合并信息的合并</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.branchmerge.advanced.html#svn.branchmerge.advanced.mergeconflicts">4.4. 合并冲突</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.branchmerge.advanced.html#svn.branchmerge.advanced.blockchanges">4.5. 阻塞修改</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.branchmerge.advanced.html#svn.branchmerge.advanced.reintegratetwice">4.6. Keeping a Reintegrated Branch Alive</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.branchmerge.advanced.html#svn.branchmerge.advanced.logblame">4.7. 感知合并的日志和注解</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.branchmerge.advanced.html#svn.branchmerge.advanced.ancestry">4.8. 关注还是忽视祖先</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.branchmerge.advanced.html#svn.branchmerge.advanced.moves">4.9. 合并和移动</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.branchmerge.advanced.html#svn.branchmerge.advanced.pre1.5clients">4.10. 阻塞不知道合并的客户端</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.branchmerge.advanced.html#svn.branchmerge.advanced.finalword">4.11. 合并跟踪的最终信息</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.branchmerge.switchwc.html">5. 使用分支</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.branchmerge.tags.html">6. 标签</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.branchmerge.tags.html#svn.branchmerge.tags.mksimple">6.1. 建立简单标签</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.branchmerge.tags.html#svn.branchmerge.tags.mkcomplex">6.2. 建立复杂标签</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.branchmerge.maint.html">7. 维护分支</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.branchmerge.maint.html#svn.branchmerge.maint.layout">7.1. 版本库布局</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.branchmerge.maint.html#svn.branchmerge.maint.lifetime">7.2. 数据的生命周期</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.branchmerge.commonpatterns.html">8. 常用分支模式</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.branchmerge.commonpatterns.html#svn.branchmerge.commonpatterns.release">8.1. 发布分支</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.branchmerge.commonpatterns.html#svn.branchmerge.commonpatterns.feature">8.2. 特性分支</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.advanced.vendorbr.html">9. 供方分支</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.advanced.vendorbr.html#svn.advanced.vendorbr.general">9.1. 常规的供方分支管理过程</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.advanced.vendorbr.html#svn.advanced.vendorbr.svn_load_dirs">9.2. svn_load_dirs.pl</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.branchmerge.summary.html">10. 总结</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="chapter">
+              <a href="svn.reposadmin.html">5. 版本库管理</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.reposadmin.basics.html">1. Subversion 版本库的定义</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.reposadmin.planning.html">2. 版本库开发策略</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.reposadmin.planning.html#svn.reposadmin.projects.chooselayout">2.1. 规划你的版本库结构</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.reposadmin.planning.html#svn.reposadmin.basics.hosting">2.2. 决定在哪里与如何部署你的版本库</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.reposadmin.planning.html#svn.reposadmin.basics.backends">2.3. 选择数据存储格式</a>
+                    </span>
+                  </dt>
+                  <dd>
+                    <dl>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.reposadmin.planning.html#svn.reposadmin.basics.backends.bdb">2.3.1. Berkeley DB</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.reposadmin.planning.html#svn.reposadmin.basics.backends.fsfs">2.3.2. FSFS</a>
+                        </span>
+                      </dt>
+                    </dl>
+                  </dd>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.reposadmin.create.html">3. 创建和配置你的版本库</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.reposadmin.create.html#svn.reposadmin.basics.creating">3.1. 创建版本库</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.reposadmin.create.html#svn.reposadmin.create.hooks">3.2. 实现版本库钩子</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.reposadmin.create.html#svn.reposadmin.create.bdb">3.3. Berkeley DB 配置</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.reposadmin.create.html#svn.reposadmin.create.fsfs">3.4. FSFS 配置</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.reposadmin.maint.html">4. 版本库维护</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.tk">4.1. 管理员的工具箱</a>
+                    </span>
+                  </dt>
+                  <dd>
+                    <dl>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.tk.svnadmin">4.1.1. svnadmin</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.tk.svnlook">4.1.2. svnlook</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.tk.svndumpfilter">4.1.3. svndumpfilter</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.tk.svnsync">4.1.4. svnsync</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.tk.fsfsreshard">4.1.5. fsfs-reshard.py</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.tk.bdbutil">4.1.6. Berkeley DB 工具</a>
+                        </span>
+                      </dt>
+                    </dl>
+                  </dd>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.setlog">4.2. 修正提交消息</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.diskspace">4.3. 管理磁盘空间</a>
+                    </span>
+                  </dt>
+                  <dd>
+                    <dl>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.diskspace.deltas">4.3.1. 让 Subversion 节约磁盘空间</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.diskspace.deadtxns">4.3.2. 删除终止的事务</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.diskspace.bdblogs">4.3.3. 删除不使用的 Berkeley DB 日志文件</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.diskspace.fsfspacking">4.3.4. 打包 FSFS 文件系统</a>
+                        </span>
+                      </dt>
+                    </dl>
+                  </dd>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.recovery">4.4. Berkeley DB 恢复</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.migrate">4.5. 版本库数据的移植</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.filtering">4.6. 过滤版本库历史</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.replication">4.7. 版本库复制</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.backup">4.8. 版本库备份</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.uuids">4.9. 管理版本库的 UUID</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.reposadmin.maint.moving-and-removing.html">5. 移动和删除版本库</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.reposadmin.summary.html">6. 总结</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="chapter">
+              <a href="svn.serverconfig.html">6. 服务配置</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.serverconfig.overview.html">1. 概述</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.serverconfig.choosing.html">2. 选择一个服务器配置</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.serverconfig.choosing.html#svn.serverconfig.choosing.svnserve">2.1. svnserve 服务器</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.serverconfig.choosing.html#svn.serverconfig.choosing.svn-ssh">2.2. 穿越 SSH 隧道的 svnserve 服务器</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.serverconfig.choosing.html#svn.serverconfig.choosing.apache">2.3. Apache 的 HTTP 服务器</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.serverconfig.choosing.html#svn.serverconfig.choosing.recommendations">2.4. 推荐</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.serverconfig.svnserve.html">3. svnserve - 定制的服务器 </a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.serverconfig.svnserve.html#svn.serverconfig.svnserve.invoking">3.1. 调用服务器</a>
+                    </span>
+                  </dt>
+                  <dd>
+                    <dl>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.serverconfig.svnserve.html#svn.serverconfig.svnserve.invoking.daemon">3.1.1. svnserve 与守护进程</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.serverconfig.svnserve.html#svn.serverconfig.svnserve.invoking.inetd">3.1.2. 通过 inetd 调用 svnserve</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.serverconfig.svnserve.html#svn.serverconfig.svnserve.invoking.tunnel">3.1.3. 通过隧道调用 svnserve</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.serverconfig.svnserve.html#svn.serverconfig.svnserve.invoking.winservice">3.1.4. svnserve as a Windows service</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.serverconfig.svnserve.html#svn.serverconfig.svnserve.invoking.launchd">3.1.5. svnserve as a launchd job</a>
+                        </span>
+                      </dt>
+                    </dl>
+                  </dd>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.serverconfig.svnserve.html#svn.serverconfig.svnserve.auth">3.2. 内置的认证和授权</a>
+                    </span>
+                  </dt>
+                  <dd>
+                    <dl>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.serverconfig.svnserve.html#svn.serverconfig.svnserve.auth.users">3.2.1. 创建一个用户文件和认证域</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.serverconfig.svnserve.html#svn.serverconfig.svnserve.auth.general">3.2.2. 设置访问控制</a>
+                        </span>
+                      </dt>
+                    </dl>
+                  </dd>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.serverconfig.svnserve.html#svn.serverconfig.svnserve.sasl">3.3. 让 svnserve 使用 SASL</a>
+                    </span>
+                  </dt>
+                  <dd>
+                    <dl>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.serverconfig.svnserve.html#svn.serverconfig.svnserve.sasl.authn">3.3.1. 使用 SASL 认证</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.serverconfig.svnserve.html#svn.serverconfig.svnserve.sasl.encryption">3.3.2. SASL 加密</a>
+                        </span>
+                      </dt>
+                    </dl>
+                  </dd>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.serverconfig.svnserve.html#svn.serverconfig.svnserve.sshauth">3.4. 穿越 SSH 隧道</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.serverconfig.svnserve.html#svn.serverconfig.svnserve.sshtricks">3.5. SSH Configuration Tricks</a>
+                    </span>
+                  </dt>
+                  <dd>
+                    <dl>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.serverconfig.svnserve.html#svn.serverconfig.svnserve.sshtricks.setup">3.5.1. 初始设置</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.serverconfig.svnserve.html#svn.serverconfig.svnserve.sshtricks.fixedcmd">3.5.2. 控制调用的命令</a>
+                        </span>
+                      </dt>
+                    </dl>
+                  </dd>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.serverconfig.httpd.html">4. httpd - Apache 的 HTTP 服务器</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.serverconfig.httpd.html#svn.serverconfig.httpd.prereqs">4.1. 先决条件</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.serverconfig.httpd.html#svn.serverconfig.httpd.basic">4.2. 基本的 Apache 配置</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.serverconfig.httpd.html#svn.serverconfig.httpd.authn">4.3. 认证选项</a>
+                    </span>
+                  </dt>
+                  <dd>
+                    <dl>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.serverconfig.httpd.html#svn.serverconfig.httpd.authn.basic">4.3.1. Basic authentication</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.serverconfig.httpd.html#svn.serverconfig.httpd.authn.digest">4.3.2. Digest authentication</a>
+                        </span>
+                      </dt>
+                    </dl>
+                  </dd>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.serverconfig.httpd.html#svn.serverconfig.httpd.authz">4.4. 授权选项</a>
+                    </span>
+                  </dt>
+                  <dd>
+                    <dl>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.serverconfig.httpd.html#svn.serverconfig.httpd.authz.blanket">4.4.1. 整体访问控制</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.serverconfig.httpd.html#svn.serverconfig.httpd.authz.perdir">4.4.2. 每目录访问控制</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.serverconfig.httpd.html#svn.serverconfig.httpd.authz.pathauthzoff">4.4.3. 禁用基于路径的检查</a>
+                        </span>
+                      </dt>
+                    </dl>
+                  </dd>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.serverconfig.httpd.html#svn.serverconfig.httpd.ssl">4.5. Protecting network traffic with SSL</a>
+                    </span>
+                  </dt>
+                  <dd>
+                    <dl>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.serverconfig.httpd.html#svn.serverconfig.httpd.ssl.server">4.5.1. Subversion server SSL certificate configuration</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.serverconfig.httpd.html#svn.serverconfig.httpd.ssl.client">4.5.2. Subversion client SSL certificate management</a>
+                        </span>
+                      </dt>
+                    </dl>
+                  </dd>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.serverconfig.httpd.html#svn.serverconfig.httpd.extra">4.6. 额外的糖果</a>
+                    </span>
+                  </dt>
+                  <dd>
+                    <dl>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.serverconfig.httpd.html#svn.serverconfig.httpd.extra.browsing">4.6.1. 版本库浏览</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.serverconfig.httpd.html#svn.serverconfig.httpd.extra.logging">4.6.2. Apache 日志</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.serverconfig.httpd.html#svn.serverconfig.httpd.extra.writethruproxy">4.6.3. 通过代理写</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.serverconfig.httpd.html#svn.serverconfig.httpd.extra.other">4.6.4. 其它的 Apache 特性</a>
+                        </span>
+                      </dt>
+                    </dl>
+                  </dd>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.serverconfig.pathbasedauthz.html">5. 基于路径的授权</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.serverconfig.operational-logging.html">6. High-level Logging</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.serverconfig.multimethod.html">7. 支持多种版本库访问方法</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="chapter">
+              <a href="svn.customization.html">7. 定制你的 Subversion 体验</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.advanced.confarea.html">1. 运行配置区</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.advanced.confarea.html#svn.advanced.confarea.layout">1.1. 配置区布局</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.advanced.confarea.html#svn.advanced.confarea.windows-registry">1.2. 配置和 Windows 注册表</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.advanced.confarea.html#svn.advanced.confarea.opts">1.3. 配置选项</a>
+                    </span>
+                  </dt>
+                  <dd>
+                    <dl>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.advanced.confarea.html#svn.advanced.confarea.opts.servers">1.3.1. 服务器</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.advanced.confarea.html#svn.advanced.confarea.opts.config">1.3.2. 配置</a>
+                        </span>
+                      </dt>
+                    </dl>
+                  </dd>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.advanced.l10n.html">2. 本地化</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.advanced.l10n.html#svn.advanced.l10n.understanding">2.1. 理解区域设置</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.advanced.l10n.html#svn.advanced.l10n.svnuse">2.2. Subversion 对区域设置的使用</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.advanced.externaleditors.html">3. 使用外置编辑器</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.advanced.externaldifftools.html">4. 使用外置比较与合并工具</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.advanced.externaldifftools.html#svn.advanced.externaldifftools.diff">4.1. 外置 diff</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.advanced.externaldifftools.html#svn.advanced.externaldifftools.diff3">4.2. 外置 diff3</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.advanced.externaldifftools.html#svn.advanced.externaldifftools.merge">4.3. External merge</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.customization.summary.html">5. 总结</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="chapter">
+              <a href="svn.developer.html">8. 嵌入 Subversion</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.developer.layerlib.html">1. 分层的库设计</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.developer.layerlib.html#svn.developer.layerlib.repos">1.1. 版本库层</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.developer.layerlib.html#svn.developer.layerlib.ra">1.2. 版本库访问层</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.developer.layerlib.html#svn.developer.layerlib.client">1.3. 客户端层</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.developer.insidewc.html">2. 进入工作副本的管理区</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.developer.insidewc.html#svn.developer.insidewc.entries">2.1. 条目文件</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.developer.insidewc.html#svn.developer.insidewc.base-and-props">2.2. 原始副本和属性文件</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.developer.usingapi.html">3. 使用 API</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.developer.usingapi.html#svn.developer.usingapi.apr">3.1. Apache 可移植运行库</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.developer.usingapi.html#svn.developer.usingapi.funcsbatons">3.2. Functions and Batons</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.developer.usingapi.html#svn.developer.usingapi.urlpath">3.3. URL 和路径需求</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.developer.usingapi.html#svn.developer.usingapi.otherlangs">3.4. 使用 C 和 C++ 以外的语言</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.developer.usingapi.html#svn.developer.usingapi.codesamples">3.5. 代码样例</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.developer.summary.html">4. 总结</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="chapter">
+              <a href="svn.ref.html">9. Subversion 完全参考</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.ref.svn.html">1. svn—Subversion Command-Line Client</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.ref.svn.html#svn.ref.svn.sw">1.1. svn 选项</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.ref.svn.html#svn.ref.svn.c">1.2. svn 子命令</a>
+                    </span>
+                  </dt>
+                  <dd>
+                    <dl>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.add.html">svn add</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.blame.html">svn blame (praise, annotate, ann)</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.cat.html">svn cat</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.changelist.html">svn changelist (cl)</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.checkout.html">svn checkout (co)</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.cleanup.html">svn cleanup</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.commit.html">svn commit (ci)</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.copy.html">svn copy (cp)</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.delete.html">svn delete (del, remove, rm)</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.diff.html">svn diff (di)</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.export.html">svn export</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.help.html">svn help (h, ?)</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.import.html">svn import</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.info.html">svn info</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.list.html">svn list (ls)</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.lock.html">svn lock</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.log.html">svn log</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.merge.html">svn merge</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.mergeinfo.html">svn mergeinfo</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.mkdir.html">svn mkdir</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.move.html">svn move (mv)</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.propdel.html">svn propdel (pdel, pd)</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.propedit.html">svn propedit (pedit, pe)</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.propget.html">svn propget (pget, pg)</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.proplist.html">svn proplist (plist, pl)</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.propset.html">svn propset (pset, ps)</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.resolve.html">svn resolve</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.resolved.html">svn resolved</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.revert.html">svn revert</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.status.html">svn status (stat, st)</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.switch.html">svn switch (sw)</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.unlock.html">svn unlock</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svn.c.update.html">svn update (up)</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                    </dl>
+                  </dd>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.ref.svnadmin.html">2. svnadmin—Subversion Repository Administration</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.ref.svnadmin.html#svn.ref.svnadmin.sw">2.1. svnadmin 选项</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.ref.svnadmin.html#svn.ref.svnadmin.c">2.2. svnadmin 子命令</a>
+                    </span>
+                  </dt>
+                  <dd>
+                    <dl>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnadmin.c.crashtest.html">svnadmin crashtest</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnadmin.c.create.html">svnadmin create</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnadmin.c.deltify.html">svnadmin deltify</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnadmin.c.dump.html">svnadmin dump</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnadmin.c.help.html">svnadmin help (h, ?)</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnadmin.c.hotcopy.html">svnadmin hotcopy</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnadmin.c.list-dblogs.html">svnadmin list-dblogs</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnadmin.c.list-unused-dblogs.html">svnadmin list-unused-dblogs</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnadmin.c.load.html">svnadmin load</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnadmin.c.lslocks.html">svnadmin lslocks</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnadmin.c.lstxns.html">svnadmin lstxns</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnadmin.c.pack.html">svnadmin pack</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnadmin.c.recover.html">svnadmin recover</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnadmin.c.rmlocks.html">svnadmin rmlocks</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnadmin.c.rmtxns.html">svnadmin rmtxns</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnadmin.c.setlog.html">svnadmin setlog</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnadmin.c.setrevprop.html">svnadmin setrevprop</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnadmin.c.setuuid.html">svnadmin setuuid</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnadmin.c.upgrade.html">svnadmin upgrade</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnadmin.c.verify.html">svnadmin verify</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                    </dl>
+                  </dd>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.ref.svnlook.html">3. svnlook—Subversion Repository Examination</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.ref.svnlook.html#svn.ref.svnlook.sw">3.1. svnlook 选项</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.ref.svnlook.html#svn.ref.svnlook.c">3.2. svnlook 子命令</a>
+                    </span>
+                  </dt>
+                  <dd>
+                    <dl>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnlook.c.author.html">svnlook author</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnlook.c.cat.html">svnlook cat</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnlook.c.changed.html">svnlook changed</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnlook.c.date.html">svnlook date</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnlook.c.diff.html">svnlook diff</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnlook.c.dirs-changed.html">svnlook dirs-changed</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnlook.c.help.html">svnlook help (h, ?)</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnlook.c.history.html">svnlook history</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnlook.c.info.html">svnlook info</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnlook.c.lock.html">svnlook lock</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnlook.c.log.html">svnlook log</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnlook.c.propget.html">svnlook propget (pget, pg)</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnlook.c.proplist.html">svnlook proplist (plist, pl)</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnlook.c.tree.html">svnlook tree</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnlook.c.uuid.html">svnlook uuid</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnlook.c.youngest.html">svnlook youngest</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                    </dl>
+                  </dd>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.ref.svnsync.html">4. svnsync—Subversion Repository Mirroring</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.ref.svnsync.html#svn.ref.svnsync.sw">4.1. svnsync 选项</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.ref.svnsync.html#svn.ref.svnsync.c">4.2. svnsync 子命令</a>
+                    </span>
+                  </dt>
+                  <dd>
+                    <dl>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnsync.c.copy-revprops.html">svnsync copy-revprops</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnsync.c.help.html">svnsync help</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnsync.c.info.html">svnsync info</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnsync.c.init.html">svnsync initialize (init)</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svnsync.c.sync.html">svnsync synchronize (sync)</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                    </dl>
+                  </dd>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.ref.svnserve.html">5. svnserve—Custom Subversion Server</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.ref.svnserve.html#svn.ref.svnserve.sw">5.1. svnserve 选项</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.ref.svndumpfilter.html">6. svndumpfilter—Subversion History Filtering</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.ref.svndumpfilter.html#svn.ref.svndumpfilter.options">6.1. svndumpfilter 选项</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.ref.svndumpfilter.html#svn.ref.svndumpfilter.c">6.2. svndumpfilter 子命令</a>
+                    </span>
+                  </dt>
+                  <dd>
+                    <dl>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svndumpfilter.commands.c.exclude.html">svndumpfilter exclude</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svndumpfilter.commands.c.include.html">svndumpfilter include</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                      <dt>
+                        <span class="refentrytitle">
+                          <a href="svn.ref.svndumpfilter.commands.c.help.html">svndumpfilter help</a>
+                        </span>
+                        <span class="refpurpose"></span>
+                      </dt>
+                    </dl>
+                  </dd>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.ref.svnversion.html">7. svnversion—Subversion Working Copy Version Info</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="refentrytitle">
+                      <a href="svn.ref.svnversion.re.html">svnversion</a>
+                    </span>
+                    <span class="refpurpose"></span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.ref.mod_dav_svn.html">8. mod_dav_svn—Subversion Apache HTTP Server Module</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="refentrytitle">
+                      <a href="svn.ref.mod_dav_svn.conf.html">mod_dav_svn 配置指令</a>
+                    </span>
+                    <span class="refpurpose"></span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.ref.mod_authz_svn.html">9. mod_authz_svn—Subversion Apache HTTP Authorization Module</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="refentrytitle">
+                      <a href="svn.ref.mod_authz_svn.conf.html">mod_authz_svn 配置指令</a>
+                    </span>
+                    <span class="refpurpose"></span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.ref.properties.html">10. Subversion 属性</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.ref.properties.html#svn.ref.properties.versioned-props">10.1. 版本控制的属性</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.ref.properties.html#svn.ref.properties.unversioned-props">10.2. 未版本控制的属性</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.ref.reposhooks.html">11. 版本库钩子</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="refentrytitle">
+                      <a href="svn.ref.reposhooks.start-commit.html">start-commit</a>
+                    </span>
+                    <span class="refpurpose"></span>
+                  </dt>
+                  <dt>
+                    <span class="refentrytitle">
+                      <a href="svn.ref.reposhooks.pre-commit.html">pre-commit</a>
+                    </span>
+                    <span class="refpurpose"></span>
+                  </dt>
+                  <dt>
+                    <span class="refentrytitle">
+                      <a href="svn.ref.reposhooks.post-commit.html">post-commit</a>
+                    </span>
+                    <span class="refpurpose"></span>
+                  </dt>
+                  <dt>
+                    <span class="refentrytitle">
+                      <a href="svn.ref.reposhooks.pre-revprop-change.html">pre-revprop-change</a>
+                    </span>
+                    <span class="refpurpose"></span>
+                  </dt>
+                  <dt>
+                    <span class="refentrytitle">
+                      <a href="svn.ref.reposhooks.post-revprop-change.html">post-revprop-change</a>
+                    </span>
+                    <span class="refpurpose"></span>
+                  </dt>
+                  <dt>
+                    <span class="refentrytitle">
+                      <a href="svn.ref.reposhooks.pre-lock.html">pre-lock</a>
+                    </span>
+                    <span class="refpurpose"></span>
+                  </dt>
+                  <dt>
+                    <span class="refentrytitle">
+                      <a href="svn.ref.reposhooks.post-lock.html">post-lock</a>
+                    </span>
+                    <span class="refpurpose"></span>
+                  </dt>
+                  <dt>
+                    <span class="refentrytitle">
+                      <a href="svn.ref.reposhooks.pre-unlock.html">pre-unlock</a>
+                    </span>
+                    <span class="refpurpose"></span>
+                  </dt>
+                  <dt>
+                    <span class="refentrytitle">
+                      <a href="svn.ref.reposhooks.post-unlock.html">post-unlock</a>
+                    </span>
+                    <span class="refpurpose"></span>
+                  </dt>
+                </dl>
+              </dd>
+            </dl>
+          </dd>
+          <dt>
+            <span class="appendix">
+              <a href="svn.intro.html">A. Subversion 快速入门指南</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.intro.install.html">1. 安装 Subversion</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.intro.quickstart.html">2. 快速指南</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="appendix">
+              <a href="svn.forcvs.html">B. CVS 用户的 Subversion 指南</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.forcvs.revnums.html">1. 版本号现在不同了</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.forcvs.directories.html">2. 目录的版本</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.forcvs.disconnected.html">3. 更多离线操作</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.forcvs.status-vs-update.html">4. 区分状态和更新</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.forcvs.status-vs-update.html#svn.forcvs.status-vs-update.status">4.1. 状态</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.forcvs.status-vs-update.html#svn.forcvs.status-vs-update.update">4.2. 更新</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.forcvs.branches-and-tags.html">5. 分支和标签</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.forcvs.properties.html">6. 元数据属性</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.forcvs.conflicts.html">7. 解决冲突</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.forcvs.binary-and-trans.html">8. 二进制文件和行结束标记转换</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.forcvs.modules.html">9. 版本化的模块</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.forcvs.auth.html">10. 认证</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.forcvs.convert.html">11. 迁移 CVS 版本库到 Subversion</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="appendix">
+              <a href="svn.webdav.html">C. WebDAV 和自动版本</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.webdav.basic.html">1. 什么是 WebDAV？</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.webdav.autoversioning.html">2. 自动版本化</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect1">
+                  <a href="svn.webdav.clients.html">3. 客户端交互性</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.webdav.clients.html#svn.webdav.clients.standalone">3.1. 独立的 WebDAV 应用程序</a>
+                    </span>
+                  </dt>
+                  <dd>
+                    <dl>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.webdav.clients.html#svn.webdav.clients.standalone.windows">3.1.1. Microsoft Office，Dreamweaver，Photoshop</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.webdav.clients.html#svn.webdav.clients.standalone.free">3.1.2. Cadaver，DAV 浏览器</a>
+                        </span>
+                      </dt>
+                    </dl>
+                  </dd>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.webdav.clients.html#svn.webdav.clients.file-explorer-extensions">3.2. 文件浏览器的 WebDAV 扩展</a>
+                    </span>
+                  </dt>
+                  <dd>
+                    <dl>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.webdav.clients.html#svn.webdav.clients.file-explorer-extensions.windows">3.2.1. Microsoft Web 文件夹</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.webdav.clients.html#svn.webdav.clients.file-explorer-extensions.linux-de">3.2.2. Nautilus，Konqueror</a>
+                        </span>
+                      </dt>
+                    </dl>
+                  </dd>
+                  <dt>
+                    <span class="sect2">
+                      <a href="svn.webdav.clients.html#svn.webdav.clients.fs-impl">3.3. WebDAV 的文件系统实现</a>
+                    </span>
+                  </dt>
+                  <dd>
+                    <dl>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.webdav.clients.html#svn.webdav.clients.fs-impl.windows">3.3.1. WebDrive，NetDrive</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.webdav.clients.html#svn.webdav.clients.fs-impl.macosx">3.3.2. Mac OS X</a>
+                        </span>
+                      </dt>
+                      <dt>
+                        <span class="sect3">
+                          <a href="svn.webdav.clients.html#svn.webdav.clients.fs-impl.linux">3.3.3. Linux davfs2</a>
+                        </span>
+                      </dt>
+                    </dl>
+                  </dd>
+                </dl>
+              </dd>
+            </dl>
+          </dd>
+          <dt>
+            <span class="appendix">
+              <a href="svn.copyright.html">D. 版权</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="index">
+              <a href="svn.index.html">索引</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <div class="list-of-figures">
+        <p>
+          <strong>插图清单</strong>
+        </p>
+        <dl>
+          <dt>1. <a href="svn.intro.whatis.html#svn.intro.architecture.dia-1">Subversion 的架构</a></dt>
+          <dt>1.1. <a href="svn.basic.version-control-basics.html#svn.basic.repository.dia-1">一个典型的客户/服务器系统</a></dt>
+          <dt>1.2. <a href="svn.basic.version-control-basics.html#svn.basic.vsn-models.problem-sharing.dia-1">需要避免的问题</a></dt>
+          <dt>1.3. <a href="svn.basic.version-control-basics.html#svn.basic.vsn-models.lock-unlock.dia-1">“锁定-修改-解锁”方案</a></dt>
+          <dt>1.4. <a href="svn.basic.version-control-basics.html#svn.basic.vsn-models.copy-merge.dia-1">“拷贝-修改-合并”方案</a></dt>
+          <dt>1.5. <a href="svn.basic.version-control-basics.html#svn.basic.vsn-models.copy-merge.dia-2">“拷贝-修改-合并”方案(续)</a></dt>
+          <dt>1.6. <a href="svn.basic.in-action.html#svn.basic.in-action.revs.dia-1">Tree changes over time</a></dt>
+          <dt>1.7. <a href="svn.basic.in-action.html#svn.basic.in-action.wc.dia-1">版本库的文件系统</a></dt>
+          <dt>4.1. <a href="svn.branchmerge.whatis.html#svn.branchmerge.whatis.dia-1">分支与开发</a></dt>
+          <dt>4.2. <a href="svn.branchmerge.using.html#svn.branchmerge.using.dia-1">开始规划版本库</a></dt>
+          <dt>4.3. <a href="svn.branchmerge.using.html#svn.branchmerge.using.create.dia-1">版本库与复制</a></dt>
+          <dt>4.4. <a href="svn.branchmerge.using.html#svn.branchmerge.using.work.dia-1">一个文件的分支历史</a></dt>
+          <dt>8.1. <a href="svn.developer.layerlib.html#svn.developer.layerlib.repos.dia-1">二维的文件和目录</a></dt>
+          <dt>8.2. <a href="svn.developer.layerlib.html#svn.developer.layerlib.repos.dia-2">版本时间 - 第三维！</a></dt>
+        </dl>
+      </div>
+      <div class="list-of-tables">
+        <p>
+          <strong>表格清单</strong>
+        </p>
+        <dl>
+          <dt>1.1. <a href="svn.basic.in-action.html#svn.basic.in-action.wc.tbl-1">版本库访问 URL</a></dt>
+          <dt>2.1. <a href="svn.tour.history.html#svn.tour.history.log.tbl-1">常用日志操作</a></dt>
+          <dt>4.1. <a href="svn.branchmerge.summary.html#svn.branchemerge.summary.tbl-1">分支与合并命令</a></dt>
+          <dt>5.1. <a href="svn.reposadmin.planning.html#svn.reposadmin.basics.backends.tbl-1">版本库数据存储对照表</a></dt>
+          <dt>6.1. <a href="svn.serverconfig.overview.html#svn.serverconfig.overview.tbl-1">Subversion 服务器选项比较</a></dt>
+          <dt>C.1. <a href="svn.webdav.clients.html#svn.webdav.clients.tbl-1">常用的 WebDAV 客户端</a></dt>
+        </dl>
+      </div>
+      <div class="list-of-examples">
+        <p>
+          <strong>范例清单</strong>
+        </p>
+        <dl>
+          <dt>4.1. <a href="svn.branchmerge.advanced.html#svn.branchmerge.advanced.hook-ex1">Merge-tracking gatekeeper start-commit hook script</a></dt>
+          <dt>5.1. <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.diskspace.deadtxns.ex-1">txn-info.sh (报告异常事务)</a></dt>
+          <dt>5.2. <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.replication.pre-revprop-change">镜像版本库的 pre-revprop-change 钩子</a></dt>
+          <dt>5.3. <a href="svn.reposadmin.maint.html#svn.reposadmin.maint.replication.start-commit">镜像版本库的 start-commit 钩子</a></dt>
+          <dt>6.1. <a href="svn.serverconfig.svnserve.html#svn.serverconfig.svnserve.invoking.launchd.ex-1">A sample svnserve launchd job definition</a></dt>
+          <dt>6.2. <a href="svn.serverconfig.httpd.html#svn.serverconfig.httpd.authz.perdir.ex-1">匿名访问的配置样例</a></dt>
+          <dt>6.3. <a href="svn.serverconfig.httpd.html#svn.serverconfig.httpd.authz.perdir.ex-2">认证访问的配置样例</a></dt>
+          <dt>6.4. <a href="svn.serverconfig.httpd.html#svn.serverconfig.httpd.authz.perdir.ex-3">混合认证/匿名访问的配置样例</a></dt>
+          <dt>6.5. <a href="svn.serverconfig.httpd.html#svn.serverconfig.httpd.authz.pathauthzoff.ex-1">禁用所有的路径检查</a></dt>
+          <dt>7.1. <a href="svn.advanced.confarea.html#svn.advanced.confarea.windows-registry.ex-1">注册表条目(.reg)文件样例</a></dt>
+          <dt>7.2. <a href="svn.advanced.externaldifftools.html#svn.advanced.externaldifftools.diff.ex-1">diffwrap.py</a></dt>
+          <dt>7.3. <a href="svn.advanced.externaldifftools.html#svn.advanced.externaldifftools.diff.ex-2">diffwrap.bat</a></dt>
+          <dt>7.4. <a href="svn.advanced.externaldifftools.html#svn.advanced.externaldifftools.diff3.ex-1">diff3wrap.py</a></dt>
+          <dt>7.5. <a href="svn.advanced.externaldifftools.html#svn.advanced.externaldifftools.diff3.ex-2">diff3wrap.bat</a></dt>
+          <dt>7.6. <a href="svn.advanced.externaldifftools.html#svn.advanced.externaldifftools.merge.ex-1">mergewrap.py</a></dt>
+          <dt>7.7. <a href="svn.advanced.externaldifftools.html#svn.advanced.externaldifftools.merge.ex-2">mergewrap.bat</a></dt>
+          <dt>8.1. <a href="svn.developer.usingapi.html#svn.developer.layerlib.repos.ex-1">Using the repository layer</a></dt>
+          <dt>8.2. <a href="svn.developer.usingapi.html#svn.developer.usingapi.otherlangs.ex-1">Using the repository layer with Python</a></dt>
+          <dt>8.3. <a href="svn.developer.usingapi.html#svn.developer.usingapi.otherlangs.ex-2">一个 Python 状态爬虫</a></dt>
+        </dl>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"> </td>
+          <td width="20%" align="center"> </td>
+          <td width="40%" align="right"> <a accesskey="n" href="svn.foreword.html">下一页</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top"> </td>
+          <td width="20%" align="center"> </td>
+          <td width="40%" align="right" valign="top"> 前言</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>svn mergeinfo</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.76.1" />
+    <link rel="home" href="index.html" title="Version Control with Subversion" />
+    <link rel="up" href="svn.ref.svn.html#svn.ref.svn.c" title="1.2. svn 子命令" />
+    <link rel="prev" href="svn.ref.svn.c.merge.html" title="svn merge" />
+    <link rel="next" href="svn.ref.svn.c.mkdir.html" title="svn mkdir" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">svn mergeinfo</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="svn.ref.svn.c.merge.html">上一页</a> </td>
+          <th width="60%" align="center">1.2. svn 子命令</th>
+          <td width="20%" align="right"> <a accesskey="n" href="svn.ref.svn.c.mkdir.html">下一页</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry" title="svn mergeinfo">
+      <a id="svn.ref.svn.c.mergeinfo"></a>
+      <div class="titlepage"></div>
+      <a id="idp12637024" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>名称</h2>
+        <p>svn mergeinfo — Query merge-related information.  See <a class="xref" href="svn.branchmerge.basicmerging.html#svn.branchmerge.basicmerging.mergeinfo" title="3.4. 合并信息和预览">第 3.4 节 “合并信息和预览”</a> for details.</p>
+      </div>
+      <div class="refsect1" title="概要">
+        <a id="idp12640720"></a>
+        <h2>概要</h2>
+        <p>
+          <code class="literal">svn mergeinfo SOURCE_URL[@REV] [TARGET[@REV]]</code>
+        </p>
+      </div>
+      <div class="refsect1" title="描述">
+        <a id="idp12642368"></a>
+        <h2>描述</h2>
+        <p>Query information related to merges (or potential merges) between
+<em class="replaceable"><code>SOURCE-URL</code></em> and
+<em class="replaceable"><code>TARGET</code></em>.  If the <code class="option">--show-revs</code>
+option is not provided, display revisions which have been merged from
+<em class="replaceable"><code>SOURCE-URL</code></em> to <em class="replaceable"><code>TARGET</code></em>.
+Otherwise, display either <code class="literal">merged</code> or
+<code class="literal">eligible</code> revisions as specified by the
+<code class="option">--show-revs</code> option.</p>
+      </div>
+      <div class="refsect1" title="选项">
+        <a id="idp12647792"></a>
+        <h2>选项</h2>
+        <div class="informalexample">
+          <pre class="screen">
+--revision (-r) REV
+--show-revs ARG
+</pre>
+        </div>
+      </div>
+      <div class="refsect1" title="例子">
+        <a id="idp12649680"></a>
+        <h2>例子</h2>
+        <p>Find out which changesets your have been merged from your trunk directory
+into your test branch:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn propget svn:mergeinfo ^/branches/test
+/branches/other:3-4
+/trunk:11-13,14,16
+$ svn mergeinfo --show-revs merged ^/trunk ^/branches/test
+r11
+r12
+r13
+r14
+r16
+$ 
+</pre>
+        </div>
+        <p>Note that the default output from the <span class="command"><strong>svn mergeinfo</strong></span>
+command is to display merged revisions, so the <code class="option">--show-revs</code>
+option shown in the command line of the previous example is not strictly
+required.</p>
+        <p>Find out which changesets from your trunk directory have not yet been merged
+into your test branch:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn mergeinfo --show-revs eligible ^/trunk ^/branches/test
+r15
+r17
+r20
+r21
+r22
+$ 
+</pre>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="svn.ref.svn.c.merge.html">上一页</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="svn.ref.svn.html#svn.ref.svn.c">上一级</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="svn.ref.svn.c.mkdir.html">下一页</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">svn merge </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">起始页</a>
+          </td>
+          <td width="40%" align="right" valign="top"> svn mkdir</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

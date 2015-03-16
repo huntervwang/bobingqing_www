@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>6. 有时你只需要清理</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.76.1" />
+    <link rel="home" href="index.html" title="Version Control with Subversion" />
+    <link rel="up" href="svn.tour.html" title="第 2 章 基本使用" />
+    <link rel="prev" href="svn.tour.history.html" title="5. 检验历史" />
+    <link rel="next" href="svn.tour.treeconflicts.html" title="7. 处理结构性冲突" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">6. 有时你只需要清理</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="svn.tour.history.html">上一页</a> </td>
+          <th width="60%" align="center">第 2 章 基本使用</th>
+          <td width="20%" align="right"> <a accesskey="n" href="svn.tour.treeconflicts.html">下一页</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="sect1" title="6. 有时你只需要清理">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="svn.tour.cleanup"></a>6. 有时你只需要清理</h2>
+          </div>
+        </div>
+      </div>
+      <p>现在我们已经覆盖了使用Subversion的日常任务，我们会检阅一些工作副本相关的管理任务。</p>
+      <div class="sect2" title="6.1. 处理你的工作副本">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="svn.tour.cleanup.disposal"></a>6.1. 处理你的工作副本</h3>
+            </div>
+          </div>
+        </div>
+        <p>Subversion doesn't track either the state or the existence of working copies
+on the server, so there's no server overhead to keeping working copies
+around.  Likewise, there's no need to let the server know that you're going
+to delete a working copy.</p>
+        <p>如果你还是喜欢使用工作副本，直到你再次使用它之前，把其保留在磁盘没有任何错误，任何时候一个<span class="command"><strong>svn
+update</strong></span>命令可以让使用的文件成为最新。</p>
+        <p>However, if you're definitely not going to use a working copy again, you can
+safely delete the entire thing using whatever directory removal capabilities
+your operating system offers.  We recommend that before you do so you run
+<strong class="userinput"><code>svn status</code></strong> and review any files listed in its output
+that are prefixed with a <code class="literal">?</code> to make certain that they're
+not of importance.</p>
+      </div>
+      <div class="sect2" title="6.2. 从中断中恢复">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="svn.tour.cleanup.interruption"></a>6.2. 从中断中恢复</h3>
+            </div>
+          </div>
+        </div>
+        <p>When Subversion modifies your working copy—either your files or its
+own administrative state—it tries to do so as safely as possible.
+Before changing the working copy, Subversion logs its intentions in a
+private <span class="quote">“<span class="quote">to-do list</span>”</span>, of sorts.  Next, it performs those
+actions to affect the desired change, holding a lock on the relevant part of
+the working copy while it works.  This prevents other Subversion clients
+from accessing the working copy mid-change.  Finally, Subversion releases
+its lock and cleans up its private to-do list.  Architecturally, this is
+similar to a journaled filesystem.  If a Subversion operation is interrupted
+(e.g, if the process is killed or if the machine crashes), the private to-do
+list remains on disk.  This allows Subversion to return to that list later
+to complete any unfinished operations and return your working copy to a
+consistent state.</p>
+        <p>This is exactly what <span class="command"><strong>svn cleanup</strong></span> does: it searches your
+working copy and runs any leftover to-do items, removing working copy locks
+as it completes those operations.  If Subversion ever tells you that some
+part of your working copy is <span class="quote">“<span class="quote">locked,</span>”</span> run <span class="command"><strong>svn
+cleanup</strong></span> to remedy the problem.  The <span class="command"><strong>svn status</strong></span>
+command will inform you about administrative locks in the working copy, too,
+by displaying an <code class="literal">L</code> next to those locked paths:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn status
+  L     somedir
+M       somedir/foo.c
+$ svn cleanup
+$ svn status
+M       somedir/foo.c
+</pre>
+        </div>
+        <p>Don't confuse these working copy administrative locks with the user-managed
+locks that Subversion users create when using the lock-modify-unlock model
+of concurrent version control; see the sidebar <a class="xref" href="svn.advanced.locking.html#svn.advanced.locking.meanings" title="“锁定”的三种含义"><span class="quote">“<span class="quote">锁定</span>”</span>的三种含义</a> for clarification.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="svn.tour.history.html">上一页</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="svn.tour.html">上一级</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="svn.tour.treeconflicts.html">下一页</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">5. 检验历史 </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">起始页</a>
+          </td>
+          <td width="40%" align="right" valign="top"> 7. 处理结构性冲突</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

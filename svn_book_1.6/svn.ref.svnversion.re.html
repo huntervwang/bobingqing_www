@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>svnversion</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.76.1" />
+    <link rel="home" href="index.html" title="Version Control with Subversion" />
+    <link rel="up" href="svn.ref.svnversion.html" title="7. svnversion—Subversion Working Copy Version Info" />
+    <link rel="prev" href="svn.ref.svnversion.html" title="7. svnversion—Subversion Working Copy Version Info" />
+    <link rel="next" href="svn.ref.mod_dav_svn.html" title="8. mod_dav_svn—Subversion Apache HTTP Server Module" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">svnversion</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="svn.ref.svnversion.html">上一页</a> </td>
+          <th width="60%" align="center">7. svnversion—Subversion Working Copy Version Info</th>
+          <td width="20%" align="right"> <a accesskey="n" href="svn.ref.mod_dav_svn.html">下一页</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry" title="svnversion">
+      <a id="svn.ref.svnversion.re"></a>
+      <div class="titlepage"></div>
+      <a id="idp13936032" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>名称</h2>
+        <p>svnversion — 总结工作副本的本地修订版本。</p>
+      </div>
+      <div class="refsect1" title="概要">
+        <a id="svn.ref.svnversion.re.syn"></a>
+        <h2>概要</h2>
+        <p>
+          <code class="literal">svnversion [OPTIONS] [WC_PATH [TRAIL_URL]]</code>
+        </p>
+      </div>
+      <div class="refsect1" title="描述">
+        <a id="svn.ref.svnversion.re.desc"></a>
+        <h2>描述</h2>
+        <p><span class="command"><strong>svnversion</strong></span> is a program for summarizing the revision
+mixture of a working copy.  The resultant revision number, or revision
+range, is written to standard output.</p>
+        <p>通常在构建过程中利用其输出定义程序的版本号码。</p>
+        <p><em class="replaceable"><code>TRAIL_URL</code></em>, if present, is the trailing portion of
+the URL used to determine whether <em class="replaceable"><code>WC_PATH</code></em> itself
+is switched (detection of switches within <em class="replaceable"><code>WC_PATH</code></em>
+does not rely on <em class="replaceable"><code>TRAIL_URL</code></em>).</p>
+        <p>When <em class="replaceable"><code>WC_PATH</code></em> is not defined, the current
+directory will be used as the working copy path.
+<em class="replaceable"><code>TRAIL_URL</code></em> cannot be defined if
+<em class="replaceable"><code>WC_PATH</code></em> is not explicitly given.</p>
+      </div>
+      <div class="refsect1" title="选项">
+        <a id="svn.ref.svnversion.re.sw"></a>
+        <h2>选项</h2>
+        <p>Like <span class="command"><strong>svnserve</strong></span>, <span class="command"><strong>svnversion</strong></span> has no
+subcommands—only options:</p>
+        <div class="variablelist">
+          <dl>
+            <dt>
+              <span class="term"><code class="option">--no-newline</code> (<code class="option">-n</code>)</span>
+            </dt>
+            <dd>
+              <p>忽略输出的尾端新行。</p>
+            </dd>
+            <dt>
+              <span class="term"><code class="option">--committed</code> (<code class="option">-c</code>)</span>
+            </dt>
+            <dd>
+              <p>使用最后修改的版本而不是当前的(例如，本地存在的最高修订版本)版本。</p>
+            </dd>
+            <dt>
+              <span class="term"><code class="option">--help</code> (<code class="option">-h</code>)</span>
+            </dt>
+            <dd>
+              <p>打印帮助摘要。</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="option">--version</code>
+              </span>
+            </dt>
+            <dd>
+              <p>打印 <span class="command"><strong>svnversion</strong></span> 的版本，无错退出。</p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="refsect1" title="例子">
+        <a id="svn.ref.svnversion.re.examples"></a>
+        <h2>例子</h2>
+        <p>如果工作副本都是一样的修订版本(例如，在更新后那一刻)，打印的修订版本是：</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnversion
+4168
+</pre>
+        </div>
+        <p>You can add <em class="replaceable"><code>TRAIL_URL</code></em> to make sure the working
+copy is not switched from what you expect.  Note that the
+<em class="replaceable"><code>WC_PATH</code></em> is required in this command:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnversion . /var/svn/trunk
+4168
+</pre>
+        </div>
+        <p>对于混合修订版本的工作副本，修订版本的范围会被打印：</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnversion
+4123:4168
+</pre>
+        </div>
+        <p>如果工作副本包含修改，尾部会增加'<code class="literal">M</code>':</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnversion
+4168M
+</pre>
+        </div>
+        <p>如果工作副本已经切换，尾部会增加'<code class="literal">S</code>':</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnversion
+4168S
+</pre>
+        </div>
+        <p><span class="command"><strong>svnversion</strong></span> will also inform you if the target working
+copy is sparsely populated (see <a class="xref" href="svn.advanced.sparsedirs.html" title="7. 稀疏目录">第 7 节 “稀疏目录”</a>)
+by attaching the '<code class="literal">P</code>' code to its output:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnversion
+4168P
+</pre>
+        </div>
+        <p>Thus, here is a mixed-revision, sparsely populated and switched working copy
+containing some local modifications:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnversion
+4123:4168MSP
+</pre>
+        </div>
+        <p>If invoked on a directory that is not a working copy,
+<span class="command"><strong>svnversion</strong></span> assumes it is an exported working copy and
+prints <span class="quote">“<span class="quote">exported</span>”</span>:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnversion
+exported
+</pre>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="svn.ref.svnversion.html">上一页</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="svn.ref.svnversion.html">上一级</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="svn.ref.mod_dav_svn.html">下一页</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">7. svnversion—Subversion Working Copy Version Info </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">起始页</a>
+          </td>
+          <td width="40%" align="right" valign="top"> 8. mod_dav_svn—Subversion Apache HTTP Server Module</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

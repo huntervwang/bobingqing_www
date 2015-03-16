@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>1. 什么是 WebDAV？</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.76.1" />
+    <link rel="home" href="index.html" title="Version Control with Subversion" />
+    <link rel="up" href="svn.webdav.html" title="附录 C. WebDAV 和自动版本" />
+    <link rel="prev" href="svn.webdav.html" title="附录 C. WebDAV 和自动版本" />
+    <link rel="next" href="svn.webdav.autoversioning.html" title="2. 自动版本化" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">1. 什么是 WebDAV？</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="svn.webdav.html">上一页</a> </td>
+          <th width="60%" align="center">附录 C. WebDAV 和自动版本</th>
+          <td width="20%" align="right"> <a accesskey="n" href="svn.webdav.autoversioning.html">下一页</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="sect1" title="1. 什么是 WebDAV？">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="svn.webdav.basic"></a>1. 什么是 WebDAV？</h2>
+          </div>
+        </div>
+      </div>
+      <p><em class="firstterm">DAV</em> 的意思是 <span class="quote">“<span class="quote">Distributed Authoring and
+Versioning</span>”</span>。RFC 2518 为 HTTP 1.1 定义了一组概念和附加的扩展方法来把 web
+变成一个更加普遍的读/写媒体。基本思想是一个 WebDAV 兼容的 web 服务器可以像普通的文件服务器一样工作；客户端可以通过 HTTP 加载(类似于
+NFS 或 SMB) WebDAV 共享文件夹。</p>
+      <p>悲惨的是，RFC 规范并没有提供任何版本控制模型。基本的 DAV 客户端和服务器只是假定每个文件或目录只有一个版本存在，可以重复的覆盖。</p>
+      <p>因为 RFC 2518 遗漏了版本概念，几年之后，另一个委员会负责撰写 RFC 3253。新的 RFC 为 WebDAV 增加了版本概念，将
+<span class="quote">“<span class="quote">V</span>”</span> 加入
+<span class="quote">“<span class="quote">DAV</span>”</span>—也就是<span class="quote">“<span class="quote">DeltaV</span>”</span>。WebDAV/DeltaV 客户端和服务器经常叫做
+<span class="quote">“<span class="quote">DeltaV</span>”</span>客户端和服务器，因为 DeltaV 包含了基本的 WebDAV。</p>
+      <p>最初的 WebDAV 标准得到了广泛的成功，所有的现代操作系统拥有内置的(后面有详细资料)对普通 WebDAV 的支持，许多流行的应用程序也可以使用
+WebDAV—仅举几例，如 Microsoft Office，Dreamweaver 和 Photoshop。在服务器方面，Apache 从 1998
+年就开始支持 WebDAV，并被认为是一个事实上的开源标准。也有几个商业的 WebDAV 服务器，例如 Microsoft 自己的 IIS。</p>
+      <p>不幸的是，DeltaV 没有这样的成功，很难寻找到任何 DeltaV 客户端和服务器。只有一些不太出名的商业产品，因此很难测试交互性。不清楚为什么
+DeltaV 这样停滞。一些人说规范太复杂了，还有些人认为尽管 DeltaV
+的特性有很大的吸引力(即使最新的技术用户也喜欢使用网络文件共享)，版本控制特性对大多数用户还不是这样有趣和必要。最后，有些人认为 DeltaV
+还这样不流行主要是因为一直没有开源的服务器产品实现它。</p>
+      <p>当 Subversion 还在设计阶段时，使用 Apache 的 httpd 作为主要网络服务器就是一个很好的想法。它已经有了支持 WebDAV
+服务的模块。DeltaV 是一个较新的规范。希望 Subversion
+服务器模块(<span class="command"><strong>mod_dav_svn</strong></span>)最终能够成为一个开源的 DeltaV 参考实现。但非常不幸，DeltaV
+的版本模型过于具体，并且与 Subversion 的模型并不匹配。虽然有些概念可以对应起来，但有些则不能。</p>
+      <p>这是什么意思呢？</p>
+      <p>首先，Subversion 客户端不是一个完全实现的 DeltaV 客户端。它需要从服务器得到 DeltaV 不能提供的东西，因此非常依赖于只有
+<span class="command"><strong>mod_dav_svn</strong></span> 理解的 Subversion 特定的 <code class="literal">REPORT</code>
+请求。</p>
+      <p>其次，<span class="command"><strong>mod_dav_svn</strong></span> 不是一个完全实现的 DeltaV 服务器，许多与 Subversion 不相关的
+DeltaV 规范还没有实现。</p>
+      <p>A long-held debate in the Subversion developer community about whether it
+was worthfile to remedy either of these situations eventually reached
+closure, with the Subversion developers officially deciding to abandon plans
+to fully support DeltaV.  New versions of Subversion will, of course,
+continue to provide the same DeltaV feature support already present in older
+releases, but no new work would be done to increase coverage of the
+specification—in fact, Subversion would intentionally begin to move
+away from strict DeltaV as its primary HTTP-based protocol.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="svn.webdav.html">上一页</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="svn.webdav.html">上一级</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="svn.webdav.autoversioning.html">下一页</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">附录 C. WebDAV 和自动版本 </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">起始页</a>
+          </td>
+          <td width="40%" align="right" valign="top"> 2. 自动版本化</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>第 2 章 基本使用</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.76.1" />
+    <link rel="home" href="index.html" title="Version Control with Subversion" />
+    <link rel="up" href="index.html" title="Version Control with Subversion" />
+    <link rel="prev" href="svn.basic.summary.html" title="3. 总结" />
+    <link rel="next" href="svn.tour.help.html" title="1. 求助！" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">第 2 章 基本使用</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="svn.basic.summary.html">上一页</a> </td>
+          <th width="60%" align="center"> </th>
+          <td width="20%" align="right"> <a accesskey="n" href="svn.tour.help.html">下一页</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="chapter" title="第 2 章 基本使用">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title"><a id="svn.tour"></a>第 2 章 基本使用</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <p>
+          <strong>目录</strong>
+        </p>
+        <dl>
+          <dt>
+            <span class="sect1">
+              <a href="svn.tour.help.html">1. 求助！</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="svn.tour.importing.html">2. 导入数据到你的版本库</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.tour.importing.html#svn.tour.importing.import">2.1. 导入文件和目录</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.tour.importing.html#svn.tour.importing.layout">2.2. 推荐的版本库布局</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.tour.importing.html#svn.tour.importing.naming">2.3. 名称中有什么？</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="svn.tour.initial.html">3. 创建工作副本</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="svn.tour.cycle.html">4. 基本的工作循环</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.tour.cycle.html#svn.tour.cycle.update">4.1. 更新你的工作副本</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.tour.cycle.html#svn.tour.cycle.edit">4.2. 开始修改 </a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.tour.cycle.html#svn.tour.cycle.examine">4.3. 检查你的修改</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.tour.cycle.html#svn.tour.cycle.examine.status">4.3.1. 查看你的修改概况</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.tour.cycle.html#svn.tour.cycle.examine.diff">4.3.2. 检查你的本地修改的详情</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.tour.cycle.html#svn.tour.cycle.revert">4.4. 修正错误</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.tour.cycle.html#svn.tour.cycle.resolve">4.5. 解决冲突</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.tour.cycle.html#svn.tour.cycle.resolve.diff">4.5.1. 交互式的查看冲突区别</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.tour.cycle.html#svn.tour.cycle.resolve.resolve">4.5.2. 交互式的解决冲突区别</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.tour.cycle.html#svn.tour.cycle.resolve.pending">4.5.3. 延后解决冲突</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.tour.cycle.html#svn.tour.cycle.resolve.byhand">4.5.4. 手工合并冲突</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.tour.cycle.html#svn.tour.cycle.resolve.theirsfull">4.5.5. 丢弃你的修改而接收新获取的修订版本</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.tour.cycle.html#svn.tour.cycle.resolve.revert">4.5.6. Punting: using svn revert</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.tour.cycle.html#svn.tour.cycle.commit">4.6. 提交你的修改</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="svn.tour.history.html">5. 检验历史</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.tour.history.html#svn.tour.history.diff">5.1. 检查历史修改详情</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.tour.history.html#svn.tour.history.diff.local">5.1.1. 检查本地修改</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.tour.history.html#svn.tour.history.diff.wcrepos">5.1.2. 比较工作副本和版本库</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.tour.history.html#svn.tour.history.diff.reposrepos">5.1.3. 比较版本库中的版本</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.tour.history.html#svn.tour.history.log">5.2. 产生历史修改列表</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.tour.history.html#svn.tour.history.browsing">5.3. 浏览版本库</a>
+                </span>
+              </dt>
+              <dd>
+                <dl>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.tour.history.html#svn.tour.history.browsing.cat">5.3.1. svn cat</a>
+                    </span>
+                  </dt>
+                  <dt>
+                    <span class="sect3">
+                      <a href="svn.tour.history.html#svn.tour.history.browsing.list">5.3.2. svn list</a>
+                    </span>
+                  </dt>
+                </dl>
+              </dd>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.tour.history.html#svn.tour.history.snapshots">5.4. 获得旧的版本库快照</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="svn.tour.cleanup.html">6. 有时你只需要清理</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.tour.cleanup.html#svn.tour.cleanup.disposal">6.1. 处理你的工作副本</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.tour.cleanup.html#svn.tour.cleanup.interruption">6.2. 从中断中恢复</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="svn.tour.treeconflicts.html">7. 处理结构性冲突</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.tour.treeconflicts.html#svn.tour.treeconflicts.example">7.1. An Example Tree Conflict</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="svn.tour.summary.html">8. 总结</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <p>Theory is useful, but its application is just plain fun.  Let's move now
+into the details of using Subversion.  By the time you reach the end of this
+chapter, you will be able to perform all the tasks you need to use
+Subversion in a normal day's work.  You'll start with getting your files
+into Subversion, followed by an initial checkout of your code.  We'll then
+walk you through making changes and examining those changes.  You'll also
+see how to bring changes made by others into your working copy, examine
+them, and work through any conflicts that might arise.</p>
+      <p>This chapter will not provide exhaustive coverage of all of Subversion's
+commands—rather, it's a conversational introduction to the most common
+Subversion tasks that you'll encounter.  This chapter assumes that you've
+read and understood <a class="xref" href="svn.basic.html" title="第 1 章 基本概念">第 1 章 <em>基本概念</em></a> and are familiar with the
+general model of Subversion.  For a complete reference of all commands, see
+<a class="xref" href="svn.ref.html" title="第 9 章 Subversion 完全参考">第 9 章 <em>Subversion 完全参考</em></a>.</p>
+      <p>Also, this chapter assumes that the reader is seeking information about how
+to interact in a basic fashion with an existing Subversion repository.  No
+repository means no working copy; no working copy means not much of interest
+in this chapter.  There are many Internet sites which offer free or
+inexpensive Subversion repository hosting services.  Or, if you'd prefer to
+set up and administer your own repositories, check out <a class="xref" href="svn.reposadmin.html" title="第 5 章 版本库管理">第 5 章 <em>版本库管理</em></a>.  But don't expect the examples in this chapter
+to work without the user having access to a Subversion repository.</p>
+      <p>Finally, any Subversion operation that contacts the repository over a
+network may potentially require that the user authenticate.  For the sake of
+simplicity, our examples throughout this chapter avoid demonstrating and
+discussing authentication.  Be aware that if you hope to apply the knowledge
+herein to an existing, real-world Subversion instance, you'll probably be
+forced to provide at least a username and password to the server.  See <a class="xref" href="svn.serverconfig.netmodel.html#svn.serverconfig.netmodel.creds" title="11.2. 客户端凭证">第 11.2 节 “客户端凭证”</a> for a detailed description of
+Subversion's handling of authentication and client credentials.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="svn.basic.summary.html">上一页</a> </td>
+          <td width="20%" align="center"> </td>
+          <td width="40%" align="right"> <a accesskey="n" href="svn.tour.help.html">下一页</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">3. 总结 </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">起始页</a>
+          </td>
+          <td width="40%" align="right" valign="top"> 1. 求助！</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

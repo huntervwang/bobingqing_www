@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>svn propdel (pdel, pd)</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.76.1" />
+    <link rel="home" href="index.html" title="Version Control with Subversion" />
+    <link rel="up" href="svn.ref.svn.html#svn.ref.svn.c" title="1.2. svn 子命令" />
+    <link rel="prev" href="svn.ref.svn.c.move.html" title="svn move (mv)" />
+    <link rel="next" href="svn.ref.svn.c.propedit.html" title="svn propedit (pedit, pe)" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">svn propdel (pdel, pd)</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="svn.ref.svn.c.move.html">上一页</a> </td>
+          <th width="60%" align="center">1.2. svn 子命令</th>
+          <td width="20%" align="right"> <a accesskey="n" href="svn.ref.svn.c.propedit.html">下一页</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry" title="svn propdel (pdel, pd)">
+      <a id="svn.ref.svn.c.propdel"></a>
+      <div class="titlepage"></div>
+      <a id="idp12695376" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>名称</h2>
+        <p>svn propdel (pdel, pd) — 删除一个项目的一个属性。</p>
+      </div>
+      <div class="refsect1" title="概要">
+        <a id="idp12698320"></a>
+        <h2>概要</h2>
+        <p>
+          <code class="literal">svn propdel PROPNAME [PATH...]</code>
+        </p>
+        <p>
+          <code class="literal">svn propdel PROPNAME --revprop -r REV [TARGET]</code>
+        </p>
+      </div>
+      <div class="refsect1" title="描述">
+        <a id="idp12700800"></a>
+        <h2>描述</h2>
+        <p>This removes properties from files, directories, or revisions.  The first
+form removes versioned properties in your working copy, and the second
+removes unversioned remote properties on a repository revision
+(<em class="replaceable"><code>TARGET</code></em> determines only which repository to
+access).</p>
+      </div>
+      <div class="refsect1" title="选项">
+        <a id="idp12702688"></a>
+        <h2>选项</h2>
+        <div class="informalexample">
+          <pre class="screen">
+--changelist ARG
+--depth ARG
+--quiet (-q)
+--recursive (-R)
+--revision (-r) REV
+--revprop
+</pre>
+        </div>
+      </div>
+      <div class="refsect1" title="例子">
+        <a id="idp12704640"></a>
+        <h2>例子</h2>
+        <p>删除你的工作副本中一个文件的一个属性</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn propdel svn:mime-type some-script
+property 'svn:mime-type' deleted from 'some-script'.
+</pre>
+        </div>
+        <p>删除一个修订版本的属性：</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn propdel --revprop -r 26 release-date 
+property 'release-date' deleted from repository revision '26'
+</pre>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="svn.ref.svn.c.move.html">上一页</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="svn.ref.svn.html#svn.ref.svn.c">上一级</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="svn.ref.svn.c.propedit.html">下一页</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">svn move (mv) </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">起始页</a>
+          </td>
+          <td width="40%" align="right" valign="top"> svn propedit (pedit, pe)</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

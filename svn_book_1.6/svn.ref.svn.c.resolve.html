@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>svn resolve</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.76.1" />
+    <link rel="home" href="index.html" title="Version Control with Subversion" />
+    <link rel="up" href="svn.ref.svn.html#svn.ref.svn.c" title="1.2. svn 子命令" />
+    <link rel="prev" href="svn.ref.svn.c.propset.html" title="svn propset (pset, ps)" />
+    <link rel="next" href="svn.ref.svn.c.resolved.html" title="svn resolved" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">svn resolve</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="svn.ref.svn.c.propset.html">上一页</a> </td>
+          <th width="60%" align="center">1.2. svn 子命令</th>
+          <td width="20%" align="right"> <a accesskey="n" href="svn.ref.svn.c.resolved.html">下一页</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry" title="svn resolve">
+      <a id="svn.ref.svn.c.resolve"></a>
+      <div class="titlepage"></div>
+      <a id="idp12795488" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>名称</h2>
+        <p>svn resolve — 解决工作副本文件或目录的冲突。</p>
+      </div>
+      <div class="refsect1" title="概要">
+        <a id="idp12798448"></a>
+        <h2>概要</h2>
+        <p>
+          <code class="literal">svn resolve PATH...</code>
+        </p>
+      </div>
+      <div class="refsect1" title="描述">
+        <a id="idp12800064"></a>
+        <h2>描述</h2>
+        <p>Resolve <span class="quote">“<span class="quote">conflicted</span>”</span> state on working copy files or
+directories.  This routine does not semantically resolve conflict markers;
+however, it replaces <em class="replaceable"><code>PATH</code></em> with the version
+specified by the <code class="option">--accept</code> argument and then removes
+conflict-related artifact files.  This allows
+<em class="replaceable"><code>PATH</code></em> to be committed again—that is, it
+tells Subversion that the conflicts have been <span class="quote">“<span class="quote">resolved.</span>”</span>.  You
+can pass the following arguments to the <code class="option">--accept</code> command
+depending on your desired resolution:</p>
+        <div class="variablelist">
+          <dl>
+            <dt>
+              <span class="term">
+                <code class="literal">base</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Choose the file that was the <code class="literal">BASE</code> revision before you
+updated your working copy.  That is, the file that you checked out before
+you made your latest edits.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">working</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Assuming that you've manually handled the conflict resolution, choose the
+version of the file as it currently stands in your working copy.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">mine-full</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Resolve all conflicted files with copies of the files as they stood
+immediately before you ran <span class="command"><strong>svn update</strong></span>.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">theirs-full</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Resolve all conflicted files with copies of the files that were fetched from
+the server when you ran <span class="command"><strong>svn update</strong></span>.</p>
+            </dd>
+          </dl>
+        </div>
+        <p>关于解决冲突的深入介绍可以看<a class="xref" href="svn.tour.cycle.html#svn.tour.cycle.resolve" title="4.5. 解决冲突">第 4.5 节 “解决冲突”</a>。</p>
+      </div>
+      <div class="refsect1" title="选项">
+        <a id="idp12816384"></a>
+        <h2>选项</h2>
+        <div class="informalexample">
+          <pre class="screen">
+--accept ACTION
+--depth ARG
+--quiet (-q)
+--recursive (-R)
+--targets FILENAME
+</pre>
+        </div>
+      </div>
+      <div class="refsect1" title="例子">
+        <a id="idp12818320"></a>
+        <h2>例子</h2>
+        <p>Here's an example where, after a postponed conflict resolution during
+update, <span class="command"><strong>svn resolve</strong></span> replaces the all conflicts in file
+<code class="filename">foo.c</code> with your edits:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn update
+Conflict discovered in 'foo.c'.
+Select: (p) postpone, (df) diff-full, (e) edit,
+        (mc) mine-conflict, (tc) theirs-conflict,
+        (s) show all options: p
+C    foo.c
+Updated to revision 5.
+Summary of conflicts:
+  Text conflicts: 1
+$ svn resolve --accept mine-full foo.c
+Resolved conflicted state of 'foo.c'
+$
+</pre>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="svn.ref.svn.c.propset.html">上一页</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="svn.ref.svn.html#svn.ref.svn.c">上一级</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="svn.ref.svn.c.resolved.html">下一页</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">svn propset (pset, ps) </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">起始页</a>
+          </td>
+          <td width="40%" align="right" valign="top"> svn resolved</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

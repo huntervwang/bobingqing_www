@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>2. Subversion 的版本控制</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.76.1" />
+    <link rel="home" href="index.html" title="Version Control with Subversion" />
+    <link rel="up" href="svn.basic.html" title="第 1 章 基本概念" />
+    <link rel="prev" href="svn.basic.version-control-basics.html" title="1. 版本控制基础概念" />
+    <link rel="next" href="svn.basic.summary.html" title="3. 总结" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">2. Subversion 的版本控制</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="svn.basic.version-control-basics.html">上一页</a> </td>
+          <th width="60%" align="center">第 1 章 基本概念</th>
+          <td width="20%" align="right"> <a accesskey="n" href="svn.basic.summary.html">下一页</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="sect1" title="2. Subversion 的版本控制">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="svn.basic.in-action"></a>2. Subversion 的版本控制</h2>
+          </div>
+        </div>
+      </div>
+      <p>We've mentioned already that Subversion is a modern, network-aware version
+control system.  As we described in <a class="xref" href="svn.basic.version-control-basics.html" title="1. 版本控制基础概念">第 1 节 “版本控制基础概念”</a> (our high-level version control
+overview), a repository serves as the core storage mechanism for
+Subversion's versioned data, and it's via working copies that users and
+their software programs interact with that data.  In this section, we'll
+begin to introduce the specific ways in which Subversion implements version
+control.</p>
+      <div class="sect2" title="2.1. Subversion 版本库">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="svn.basic.svn-repositories"></a>2.1. Subversion 版本库</h3>
+            </div>
+          </div>
+        </div>
+        <p>Subversion implements the concept of a version control repository much as
+any other modern version control system would.  Unlike a working copy, a
+Subversion repository is an abstract entity, able to be operated upon almost
+exclusively by Subversion's own libraries and tools.  As most of a user's
+Subversion interactions involve the use of the Subversion client and occur
+in the context of a working copy, we spend the majority of this book
+discussing the Subversion working copy and how to manipulate it.  For the
+finer details of the repository, though, check out <a class="xref" href="svn.reposadmin.html" title="第 5 章 版本库管理">第 5 章 <em>版本库管理</em></a>.</p>
+      </div>
+      <div class="sect2" title="2.2. 修订版本">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="svn.basic.in-action.revs"></a>2.2. 修订版本</h3>
+            </div>
+          </div>
+        </div>
+        <a id="idp7099728" class="indexterm"></a>
+        <p>A Subversion client commits (that is, communicates the changes made to) any
+number of files and directories as a single atomic transaction.  By atomic
+transaction, we mean simply this: either all of the changes are accepted
+into the repository, or none of them is.  Subversion tries to retain this
+atomicity in the face of program crashes, system crashes, network problems,
+and other users' actions.</p>
+        <p>Each time the repository accepts a commit, this creates a new state of the
+filesystem tree, called a <em class="firstterm">revision</em>.  Each revision is
+assigned a unique natural number, one greater than the number assigned to
+the previous revision.  The initial revision of a freshly created repository
+is numbered 0 and consists of nothing but an empty root directory.</p>
+        <p><a class="xref" href="svn.basic.in-action.html#svn.basic.in-action.revs.dia-1" title="图 1.6. Tree changes over time">图 1.6 “Tree changes over time”</a>可以更形象的描述版本库，想象有一组修订号，从 0
+开始，从左到右，每一个修订号有一个目录树挂在它下面，每一个树好像是一次提交后的版本库<span class="quote">“<span class="quote">快照</span>”</span>。</p>
+        <div class="figure">
+          <a id="svn.basic.in-action.revs.dia-1"></a>
+          <p class="title">
+            <strong>图 1.6. Tree changes over time</strong>
+          </p>
+          <div class="figure-contents">
+            <div>
+              <img src="images/ch02dia7.png" alt="Tree changes over time" />
+            </div>
+          </div>
+        </div>
+        <br class="figure-break" />
+        <div class="sidebar" title="全局版本号">
+          <div class="titlepage">
+            <div>
+              <div>
+                <p class="title">
+                  <strong>全局版本号</strong>
+                </p>
+              </div>
+            </div>
+          </div>
+          <a id="idp7106656" class="indexterm"></a>
+          <p>Unlike most version control systems, Subversion's revision numbers apply to
+<span class="emphasis"><em>the entire repository tree</em></span>, not individual files.  Each
+revision number selects an entire tree, a particular state of the repository
+after some committed change.  Another way to think about it is that revision
+N represents the state of the repository filesystem after the Nth commit.
+When Subversion users talk about <span class="quote">“<span class="quote">revision 5 of
+<code class="filename">foo.c</code>,</span>”</span> they really mean
+<span class="quote">“<span class="quote"><code class="filename">foo.c</code> as it appears in revision 5.</span>”</span>
+Notice that in general, revisions N and M of a file do
+<span class="emphasis"><em>not</em></span> necessarily differ! Many other version control
+systems use per-file revision numbers, so this concept may seem unusual at
+first. (Former CVS users might want to see <a class="xref" href="svn.forcvs.html" title="附录 B. CVS 用户的 Subversion 指南">附录 B, <em>CVS 用户的 Subversion 指南</em></a> for
+more details.)</p>
+        </div>
+      </div>
+      <div class="sect2" title="2.3. 版本库的地址">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="svn.advanced.reposurls"></a>2.3. 版本库的地址</h3>
+            </div>
+          </div>
+        </div>
+        <a id="idp7114000" class="indexterm"></a>
+        <a id="idp7115648" class="indexterm"></a>
+        <p>Subversion client programs use URLs to identify versioned files and
+directories in Subversion repositories.  For the most part, these URLs use
+the standard syntax, allowing for server names and port numbers to be
+specified as part of the URL.</p>
+        <div class="informalexample">
+          <div class="itemizedlist">
+            <ul class="itemizedlist" type="disc" compact="compact">
+              <li class="listitem">http://svn.example.com/svn/project</li>
+              <li class="listitem">http://svn.example.com:9834/repos</li>
+            </ul>
+          </div>
+        </div>
+        <p>Subversion repository URLs aren't limited to only the
+<code class="literal">http://</code> variety.  Because Subversion offers several
+different ways for its clients to communicate with its servers, the URLs
+used to address the repository differ subtly depending on which repository
+access mechanism is employed.  <a class="xref" href="svn.basic.in-action.html#svn.basic.in-action.wc.tbl-1" title="表 1.1. 版本库访问 URL">表 1.1 “版本库访问 URL”</a> describes how different URL schemes
+map to the available repository access methods.  For more details about
+Subversion's server options, see <a class="xref" href="svn.serverconfig.html" title="第 6 章 服务配置">第 6 章 <em>服务配置</em></a>.</p>
+        <div class="table">
+          <a id="svn.basic.in-action.wc.tbl-1"></a>
+          <p class="title">
+            <strong>表 1.1. 版本库访问 URL</strong>
+          </p>
+          <div class="table-contents">
+            <table summary="版本库访问 URL" border="1">
+              <colgroup>
+                <col />
+                <col />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>模式</th>
+                  <th>访问方法</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <code class="literal">file:///</code>
+                  </td>
+                  <td>直接版本库访问(本地磁盘)</td>
+                </tr>
+                <tr>
+                  <td>
+                    <code class="literal">http://</code>
+                  </td>
+                  <td>通过配置Subversion的Apache服务器的WebDAV协议</td>
+                </tr>
+                <tr>
+                  <td>
+                    <code class="literal">https://</code>
+                  </td>
+                  <td>Same as <code class="literal">http://</code>, but with SSL encryption</td>
+                </tr>
+                <tr>
+                  <td>
+                    <code class="literal">svn://</code>
+                  </td>
+                  <td>通过定制的协议访问 <code class="literal">svnserve</code> 服务器</td>
+                </tr>
+                <tr>
+                  <td>
+                    <code class="literal">svn+ssh://</code>
+                  </td>
+                  <td>Same as <code class="literal">svn://</code>, but through an SSH tunnel</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <br class="table-break" />
+        <p>Subversion's handling of URLs has some notable nuances.  For example, URLs
+containing the <code class="literal">file://</code> access method (used for local
+repositories) must, in accordance with convention, have either a server name
+of <code class="literal">localhost</code> or no server name at all:</p>
+        <div class="informalexample">
+          <div class="itemizedlist">
+            <ul class="itemizedlist" type="disc" compact="compact">
+              <li class="listitem">file:///var/svn/repos</li>
+              <li class="listitem">file://localhost/var/svn/repos</li>
+            </ul>
+          </div>
+        </div>
+        <p>同样，在 Windows 平台下使用 <code class="literal">file://</code>
+模式时需要使用一个非正式的<span class="quote">“<span class="quote">标准</span>”</span>语法来访问本机上不在同一个磁盘分区中的版本库。下面的任意一个 URL
+路径语法都可以工作，其中的 <code class="literal">X</code> 表示版本库所在的磁盘分区：</p>
+        <div class="informalexample">
+          <div class="itemizedlist">
+            <ul class="itemizedlist" type="disc" compact="compact">
+              <li class="listitem">file:///X:/var/svn/repos</li>
+              <li class="listitem">file:///X|/var/svn/repos</li>
+            </ul>
+          </div>
+        </div>
+        <p>Note that a URL uses forward slashes even though the native (non-URL) form
+of a path on Windows uses backslashes.  Also note that when using the
+<code class="literal">file:///<em class="replaceable"><code>X</code></em>|/</code> form at the
+command line, you need to quote the URL (wrap it in quotation marks) so that
+the vertical bar character is not interpreted as a pipe.</p>
+        <div class="note" title="注意" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[注意]" src="images/note.png" />
+              </td>
+              <th align="left">注意</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>也必须意识到 Subversion 的 <code class="literal">file://</code> URL 不能在普通的 web 服务器中工作。当你尝试在
+web 服务器查看一个 <code class="literal">file://</code> URL 时，它会通过直接检测文件系统读取和显示那个位置的文件内容，但是
+Subversion 的资源存在于虚拟文件系统(见<a class="xref" href="svn.developer.layerlib.html#svn.developer.layerlib.repos" title="1.1. 版本库层">第 1.1 节 “版本库层”</a>)中，你的浏览器不会理解怎样读取这个文件系统。</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <p>The Subversion client will automatically encode URLs as necessary, just like
+a web browser does.  For example, the URL <code class="literal">http://host/path with
+space/project/españa</code> — which contains both spaces and
+upper-ASCII characters — will be automatically interpreted by
+Subversion as if you'd provided
+<code class="literal">http://host/path%20with%20space/project/espa%C3%B1a</code>.  If
+the URL contains spaces, be sure to place it within quotation marks at the
+command line so that your shell treats the whole thing as a single argument
+to the program.</p>
+        <p>There is one notable exception to Subversion's handling of URLs which also
+applies to its handling of local paths in many contexts, too.  If the final
+path component of your URL or local path contains an at sign
+(<code class="literal">@</code>), you need to use a special syntax—described in
+<a class="xref" href="svn.advanced.pegrevs.html" title="2. Peg 和实施修订版本">第 2 节 “Peg 和实施修订版本”</a>—in order to make Subversion
+properly address that resource.</p>
+        <p>In Subversion 1.6, a new caret (<code class="literal">^</code>)  notation was
+introduced as a shorthand for <span class="quote">“<span class="quote">the URL of the repository's root
+directory</span>”</span>.  For example, you can use the
+<code class="literal">^/tags/bigsandwich/</code> to refer to the URL of the
+<code class="filename">/tags/bigsandwich</code> directory in the root of the
+repository.  Note that this URL syntax works only when your current working
+directory is a working copy—the command-line client knows the
+repository's root URL by looking at the working copy's metadata.  Also note
+that when you wish to refer precisely to the root directory of the
+repository, you must do so using <code class="literal">^/</code> (with the trailing
+slash character), not merely <code class="literal">^</code>.</p>
+      </div>
+      <div class="sect2" title="2.4. Subversion 的工作副本">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="svn.basic.in-action.wc"></a>2.4. Subversion 的工作副本</h3>
+            </div>
+          </div>
+        </div>
+        <a id="idp7160384" class="indexterm"></a>
+        <p>一个 Subversion工
+作副本是你本地机器上的一个普通目录，保存着一些文件，你可以任意的编辑文件，而且如果是源代码文件，你可以像平常一样编译，你的工作副本是你的私有工作区，在你明确的做了特定操作之前，Subversion
+不会把你的修改与其他人的合并，也不会把你的修改展示给别人，你甚至可以拥有同一个项目的多个工作副本。</p>
+        <p>当你在工作副本作了一些修改并且确认它们工作正常之后，Subversion
+提供了一个命令可以<span class="quote">“<span class="quote">发布</span>”</span>你的修改给项目中的其他人(通过写到版本库)，如果别人发布了各自的修改，Subversion
+提供了手段可以把这些修改与你的工作目录进行合并(通过读取版本库)。</p>
+        <p>工作副本也包括一些由 Subversion 创建并维护的额外文件，用来协助执行命令。通常情况下，你的工作副本的每个文件夹都有一个以
+<code class="filename">.svn</code>
+为名的文件夹，也被叫做工作副本的<em class="firstterm">管理目录</em>，这个目录里的文件能够帮助 Subversion
+识别哪些文件做过修改，哪些文件相对于别人的工作已经过期。</p>
+        <div class="tip" title="提示" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Tip">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[提示]" src="images/tip.png" />
+              </td>
+              <th align="left">提示</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>While <code class="filename">.svn</code> is the de facto name of the Subversion
+administrative directory, Windows users may run into problems with the
+ASP.NET Web application framework disallowing access to directories whose
+names begin with a dot (<code class="literal">.</code>).  As a special consideration
+to users in such situations, Subversion will instead use
+<code class="literal">_svn</code> as the administrative directory name if it finds a
+variable named <code class="literal">SVN_ASP_DOT_NET_HACK</code> in its operating
+environment.  Throughout this book, any reference you find to
+<code class="filename">.svn</code> applies also to <code class="literal">_svn</code> when this
+<span class="quote">“<span class="quote">ASP.NET hack</span>”</span> is in use.</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="sect3" title="2.4.1. 工作副本的工作方式">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title"><a id="svn.basic.in-action.track-repos"></a>2.4.1. 工作副本的工作方式</h4>
+              </div>
+            </div>
+          </div>
+          <p>For each file in a working directory, Subversion records (among other
+things) two essential pieces of information:</p>
+          <div class="itemizedlist">
+            <ul class="itemizedlist" type="disc">
+              <li class="listitem">
+                <p>作为工作文件基准的版本(叫做文件的<em class="firstterm">工作版本</em>)</p>
+              </li>
+              <li class="listitem">
+                <p>本地副本最近一次被版本库更新的时间戳。</p>
+              </li>
+            </ul>
+          </div>
+          <p>给定这些信息，通过与版本库通讯，Subversion可以告诉我们工作文件是处于如下四种状态的那一种：</p>
+          <div class="variablelist">
+            <dl>
+              <dt>
+                <span class="term">未修改且是当前的</span>
+              </dt>
+              <dd>
+                <p>文件在工作目录里没有修改，在工作版本之后没有修改提交到版本库。<span class="command"><strong>svn commit</strong></span>
+操作不做任何事情，<span class="command"><strong>svn update</strong></span> 不做任何事情。</p>
+              </dd>
+              <dt>
+                <span class="term">本地已修改且是当前的</span>
+              </dt>
+              <dd>
+                <p>在工作目录已经修改，从基本修订版本之后没有修改提交到版本库。本地修改没有提交，因此 <span class="command"><strong>svn commit</strong></span>
+会成功提交，<span class="command"><strong>svn update</strong></span> 不做任何事情。</p>
+              </dd>
+              <dt>
+                <span class="term">本地未修改，已过时</span>
+              </dt>
+              <dd>
+                <p>这个文件在工作目录没有修改，但在版本库中已经修改了。这个文件最终将更新到最新版本，成为当时的公共修订版本。<span class="command"><strong>svn
+commit</strong></span> 不做任何事情，<span class="command"><strong>svn update</strong></span> 将会取得最新的版本到工作副本。</p>
+              </dd>
+              <dt>
+                <span class="term">本地已修改，已过时</span>
+              </dt>
+              <dd>
+                <p>这个文件在工作目录和版本库都得到修改。一个 <span class="command"><strong>svn commit</strong></span>
+将会失败，这个文件必须首先更新，<span class="command"><strong>svn update</strong></span> 命令会合并公共和本地修改，如果 Subversion
+不可以自动完成，将会让用户解决冲突。</p>
+              </dd>
+            </dl>
+          </div>
+        </div>
+        <div class="sect3" title="2.4.2. 工作副本基本交互操作">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title"><a id="svn.basic.in-action.wc-funcdamentals"></a>2.4.2. 工作副本基本交互操作</h4>
+              </div>
+            </div>
+          </div>
+          <p>一个典型的 Subversion
+版本库经常包含许多项目的文件(或者说源代码)，通常每一个项目都是版本库的子目录，在这种布局下，一个用户的工作副本往往对应版本库的的一个子目录。</p>
+          <p>举一个例子，你的版本库包含两个软件项目，<code class="literal">paint</code> 和
+<code class="literal">calc</code>。每个项目在它们各自的顶级子目录下，见<a class="xref" href="svn.basic.in-action.html#svn.basic.in-action.wc.dia-1" title="图 1.7. 版本库的文件系统">图 1.7 “版本库的文件系统”</a>。</p>
+          <div class="figure">
+            <a id="svn.basic.in-action.wc.dia-1"></a>
+            <p class="title">
+              <strong>图 1.7. 版本库的文件系统</strong>
+            </p>
+            <div class="figure-contents">
+              <div>
+                <img src="images/ch02dia6.png" alt="版本库的文件系统" />
+              </div>
+            </div>
+          </div>
+          <br class="figure-break" />
+          <a id="idp7194704" class="indexterm"></a>
+          <a id="idp7196352" class="indexterm"></a>
+          <a id="idp7197744" class="indexterm"></a>
+          <p>To get a working copy, you must <em class="firstterm">check out</em> some
+subtree of the repository.  (The term <span class="emphasis"><em>check out</em></span> may
+sound like it has something to do with locking or reserving resources, but
+it doesn't; it simply creates a working copy of the project for you.)  For
+example, if you check out <code class="filename">/calc</code>, you will get a working
+copy like this:</p>
+          <div class="informalexample">
+            <pre class="screen">
+$ svn checkout http://svn.example.com/repos/calc
+A    calc/Makefile
+A    calc/integer.c
+A    calc/button.c
+Checked out revision 56.
+$ ls -A calc
+Makefile  button.c integer.c .svn/
+$
+</pre>
+          </div>
+          <p>列表中的 A 表示 Subversion 增加了一些条目到工作副本，你现在有了一个 <code class="filename">/calc</code>
+的个人拷贝，有一个附加的目录—<code class="filename">.svn</code>—保存着前面提及的 Subversion 需要的额外信息。</p>
+          <p>假定你修改了 <code class="filename">button.c</code>，因为 <code class="filename">.svn</code>
+目录记录着文件的修改日期和原始内容，Subversion 可以告诉你已经修改了文件，然而，在你明确告诉它之前，Subversion
+不会将你的改变公开，将改变公开的操作被叫做提交(<em class="firstterm">committing</em>，或者是<em class="firstterm">检入</em>)修改到版本库。</p>
+          <a id="idp7207104" class="indexterm"></a>
+          <a id="idp7208752" class="indexterm"></a>
+          <a id="idp7210144" class="indexterm"></a>
+          <p>将你的修改发布给别人，你可以使用 Subversion 的 <span class="command"><strong>commit</strong></span> 命令：</p>
+          <div class="informalexample">
+            <pre class="screen">
+$ svn commit button.c -m "Fixed a typo in button.c."
+Sending        button.c
+Transmitting file data .
+Committed revision 57.
+$
+</pre>
+          </div>
+          <p>这时你对 <code class="filename">button.c</code>
+的修改已经提交到了版本库，其中包含了关于此次提交的日志信息(例如是修改了拼写错误)。如果其他人取出了
+<code class="filename">/calc</code> 的一个工作副本，他们会看到这个文件最新的版本。</p>
+          <p>假设你有个合作者 Sally，她和你同时取出了 <code class="filename">/calc</code> 的一个工作拷贝，你提交了对
+<code class="filename">button.c</code> 的修改，Sally 的工作副本并没有改变，Subversion
+只在用户要求的时候才改变工作副本。</p>
+          <a id="idp7217936" class="indexterm"></a>
+          <a id="idp7219584" class="indexterm"></a>
+          <a id="idp7220976" class="indexterm"></a>
+          <p>要使项目最新，Sally 可以通过使用 <span class="command"><strong>svn update</strong></span> 命令，要求 Subversion
+<em class="firstterm">更新</em>她的工作副本。这将结合你和所有其他人在她上次更新之后的改变到她的工作副本。</p>
+          <div class="informalexample">
+            <pre class="screen">
+$ pwd
+/home/sally/calc
+$ ls -A
+Makefile button.c integer.c .svn/
+$ svn update
+U    button.c
+Updated to revision 57.
+$
+</pre>
+          </div>
+          <p><span class="command"><strong>svn update</strong></span> 命令的输出表明 Subversion 更新了
+<code class="filename">button.c</code> 的内容，注意，Sally 不必指定要更新的文件，subversion 利用
+<code class="filename">.svn</code> 以及版本库的进一步信息决定哪些文件需要更新。</p>
+        </div>
+        <div class="sect3" title="2.4.3. 混合版本的工作副本">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title"><a id="svn.basic.in-action.mixedrevs"></a>2.4.3. 混合版本的工作副本</h4>
+              </div>
+            </div>
+          </div>
+          <a id="idp7229008" class="indexterm"></a>
+          <p>As a general principle, Subversion tries to be as flexible as possible.  One
+special kind of flexibility is the ability to have a working copy containing
+files and directories with a mix of different working revision numbers.
+Subversion working copies do not always correspond to any single revision in
+the repository; they may contain files from several different revisions.
+For example, suppose you check out a working copy from a repository whose
+most recent revision is 4:</p>
+          <div class="informalexample">
+            <div class="literallayout">
+              <p><br />
+calc/<br />
+   Makefile:4<br />
+   integer.c:4<br />
+   button.c:4<br />
+</p>
+            </div>
+          </div>
+          <p>此刻，工作目录与版本库的修订版本 4 完全对应，然而，你修改了 <code class="filename">button.c</code>
+并且提交之后，假设没有别的提交出现，你的提交会在版本库建立修订版本 5，你的工作副本会是这个样子的：</p>
+          <div class="informalexample">
+            <div class="literallayout">
+              <p><br />
+calc/<br />
+   Makefile:4<br />
+   integer.c:4<br />
+   button.c:5<br />
+</p>
+            </div>
+          </div>
+          <p>假设此刻，Sally 提交了对 <code class="filename">integer.c</code> 的修改，建立修订版本 6，如果你使用
+<span class="command"><strong>svn update</strong></span> 来更新你的工作副本，你会看到：</p>
+          <div class="informalexample">
+            <div class="literallayout">
+              <p><br />
+calc/<br />
+   Makefile:6<br />
+   integer.c:6<br />
+   button.c:6<br />
+</p>
+            </div>
+          </div>
+          <p>Sally 对 <code class="filename">integer.c</code> 的改变会出现在你的工作副本，你对
+<code class="filename">button.c</code> 的改变还在，在这个例子里，<code class="filename">Makefile</code> 在
+4, 5, 6 的修订版本都是一样的，但是 Subversion 会把他的 <code class="filename">Makefile</code> 的修订号设为 6
+来表明它是最新的，所以你在工作副本顶级目录作一次干净的更新，会使得所有内容对应版本库的同一修订版本。</p>
+          <div class="sect4" title="2.4.3.1. 更新和提交是分开的">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title"><a id="svn.basic.in-action.mixedrevs.update-commit"></a>2.4.3.1. 更新和提交是分开的</h5>
+                </div>
+              </div>
+            </div>
+            <p>One of the fundamental rules of Subversion is that a <span class="quote">“<span class="quote">push</span>”</span>
+action does not cause a <span class="quote">“<span class="quote">pull</span>”</span> nor vice versa.  Just because
+you're ready to submit new changes to the repository doesn't mean you're
+ready to receive changes from other people.  And if you have new changes
+still in progress, <span class="command"><strong>svn update</strong></span> should gracefully merge
+repository changes into your own, rather than forcing you to publish them.</p>
+            <p>这个规则的主要副作用就是，工作副本需要记录额外的信息来追踪混合修订版本，并且也需要能容忍这种混合，当目录本身也是版本化的时候情况更加复杂。</p>
+            <p>举个例子，假定你有一个工作副本，修订版本号是10。你修改了 <code class="filename">foo.html</code>，然后执行
+<span class="command"><strong>svn
+commit</strong></span>，在版本库里创建了修订版本15。当成功提交之后，许多用户希望工作副本完全变成修订版本15，但是事实并非如此。修订版本从10到15会发生任何修改，可是客户端在运行
+<span class="command"><strong>svn update</strong></span> 之前不知道版本库发生了怎样的改变，<span class="command"><strong>svn commit</strong></span>
+不会拖出任何新的修改。另一方面，如果 <span class="command"><strong>svn commit</strong></span>
+会自动下载最新的修改，可以使得整个工作副本成为修订版本15—但是，那样我们会打破<span class="quote">“<span class="quote">推</span>”</span>和<span class="quote">“<span class="quote">拉</span>”</span>完全分开的原则。因此，Subversion
+客户端最安全的方式是标记一个文件— <code class="filename">foo.html</code>
+—为修订版本15，工作副本余下的部分还是修订版本10。只有运行 <span class="command"><strong>svn update</strong></span>
+才会下载最新的修改，整个工作副本被标记为修订版本15。</p>
+          </div>
+          <div class="sect4" title="2.4.3.2. 混合修订版本很常见">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title"><a id="svn.basic.in-action.mixedrevs.normal"></a>2.4.3.2. 混合修订版本很常见</h5>
+                </div>
+              </div>
+            </div>
+            <p>事实上，<span class="emphasis"><em>每次</em></span>运行 <span class="command"><strong>svn
+commit</strong></span>，你的工作拷贝都会进入混合多个修订版本的状态，刚刚提交的文件会比其他文件有更高的修订版本号。经过多次提交(其间没有更新)，你的工作副本会完全是混合的修订版本。即使只有你一个人使用版本库，你依然会见到这个现象。为了检查混合工作修订版本，可以使用
+<span class="command"><strong>svn status</strong></span> 命令的选项 <code class="option">--verbose</code> (详细信息见<a class="xref" href="svn.tour.cycle.html#svn.tour.cycle.examine.status" title="4.3.1. 查看你的修改概况">第 4.3.1 节 “查看你的修改概况”</a>)。</p>
+            <p>通常，新用户对于工作副本的混合修订版本一无所知，这会让人糊涂，因为许多客户端命令对于所检验条目的修订版本很敏感。例如 <span class="command"><strong>svn
+log</strong></span> 命令显示一个文件或目录的历史修改信息(见<a class="xref" href="svn.tour.history.html#svn.tour.history.log" title="5.2. 产生历史修改列表">第 5.2 节 “产生历史修改列表”</a>)，当用户对一个工作副本对象调用这个命令，他们希望看到这个对象的整个历史信息。但是如果这个对象的修订版本已经相当老了(通常因为很长时间没有运行
+<span class="command"><strong>svn update</strong></span>)，此时会显示比这个对象<span class="emphasis"><em>更老的</em></span>历史。</p>
+          </div>
+          <div class="sect4" title="2.4.3.3. 混合版本很有用">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title"><a id="svn.basic.in-action.mixedrevs.useful"></a>2.4.3.3. 混合版本很有用</h5>
+                </div>
+              </div>
+            </div>
+            <p>如果你的项目十分复杂，有时候你会发现强制工作副本的一部分<span class="quote">“<span class="quote">回溯</span>”</span>到过去非常有用(或者更新到过去的某个修订版本)，你将在<a class="xref" href="svn.tour.html" title="第 2 章 基本使用">第 2 章 <em>基本使用</em></a>学习到如何这样做。或许你很希望测试某一子目录下某一子模块的早期版本，又或是要测试一个 bug
+什么时候发生，这是版本控制系统像<span class="quote">“<span class="quote">时间机器</span>”</span>的一个方面—这个特性允许工作副本的任何一个部分在历史中前进或后退。</p>
+          </div>
+          <div class="sect4" title="2.4.3.4. 混合版本有限制">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title"><a id="svn.basic.in-action.mixedrevs.limits"></a>2.4.3.4. 混合版本有限制</h5>
+                </div>
+              </div>
+            </div>
+            <p>无论你如何在工作副本中利用混合修订版本，这种灵活性还是有限制的。</p>
+            <p>首先，你不可以提交一个不是完全最新的文件或目录，如果有个新的版本存在于版本库，你的删除操作会被拒绝，这防止你不小心破坏你没有见到的东西。</p>
+            <p>第二，如果目录已经不是最新的了，你不能提交一个目录的元数据更改。你将会在<a class="xref" href="svn.advanced.html" title="第 3 章 高级主题">第 3 章 <em>高级主题</em></a>学习附加<span class="quote">“<span class="quote">属性</span>”</span>，一个目录的工作修订版本定义了许多条目和属性，因而对一个过期的版本提交属性会破坏一些你没有见到的属性。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="svn.basic.version-control-basics.html">上一页</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="svn.basic.html">上一级</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="svn.basic.summary.html">下一页</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">1. 版本控制基础概念 </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">起始页</a>
+          </td>
+          <td width="40%" align="right" valign="top"> 3. 总结</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

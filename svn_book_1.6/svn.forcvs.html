@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>附录 B. CVS 用户的 Subversion 指南</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.76.1" />
+    <link rel="home" href="index.html" title="Version Control with Subversion" />
+    <link rel="up" href="index.html" title="Version Control with Subversion" />
+    <link rel="prev" href="svn.intro.quickstart.html" title="2. 快速指南" />
+    <link rel="next" href="svn.forcvs.revnums.html" title="1. 版本号现在不同了" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">附录 B. CVS 用户的 Subversion 指南</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="svn.intro.quickstart.html">上一页</a> </td>
+          <th width="60%" align="center"> </th>
+          <td width="20%" align="right"> <a accesskey="n" href="svn.forcvs.revnums.html">下一页</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="appendix" title="附录 B. CVS 用户的 Subversion 指南">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title"><a id="svn.forcvs"></a>附录 B. CVS 用户的 Subversion 指南</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <p>
+          <strong>目录</strong>
+        </p>
+        <dl>
+          <dt>
+            <span class="sect1">
+              <a href="svn.forcvs.revnums.html">1. 版本号现在不同了</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="svn.forcvs.directories.html">2. 目录的版本</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="svn.forcvs.disconnected.html">3. 更多离线操作</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="svn.forcvs.status-vs-update.html">4. 区分状态和更新</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.forcvs.status-vs-update.html#svn.forcvs.status-vs-update.status">4.1. 状态</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="svn.forcvs.status-vs-update.html#svn.forcvs.status-vs-update.update">4.2. 更新</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="svn.forcvs.branches-and-tags.html">5. 分支和标签</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="svn.forcvs.properties.html">6. 元数据属性</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="svn.forcvs.conflicts.html">7. 解决冲突</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="svn.forcvs.binary-and-trans.html">8. 二进制文件和行结束标记转换</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="svn.forcvs.modules.html">9. 版本化的模块</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="svn.forcvs.auth.html">10. 认证</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="svn.forcvs.convert.html">11. 迁移 CVS 版本库到 Subversion</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <p>这个附录可以作为 CVS 用户开始使用 Subversion 的指南，实质上就是在<span class="quote">“<span class="quote">10000
+英尺</span>”</span>鸟瞰这两个系统之间的区别列表。在每一小节，我们会尽可能提供相关章节的引用。</p>
+      <p>尽管 Subversion 的目标是接管当前和未来的 CVS 基础用户，但是仍然需要一些新的特性和设计来修正一些 CVS
+<span class="quote">“<span class="quote">不好的</span>”</span>行为，这意味着，作为一个 CVS 用户，你或许需要打破习惯—忘记一些奇怪的习惯来作为开始。</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="svn.intro.quickstart.html">上一页</a> </td>
+          <td width="20%" align="center"> </td>
+          <td width="40%" align="right"> <a accesskey="n" href="svn.forcvs.revnums.html">下一页</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">2. 快速指南 </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">起始页</a>
+          </td>
+          <td width="40%" align="right" valign="top"> 1. 版本号现在不同了</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
