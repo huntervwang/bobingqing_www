@@ -10,6 +10,10 @@
         <h2>Gradle groovy doc Version：2.3 <a href="http://www.bobingqing.com/gradle_groovydoc/">点击阅读</a></h2>
         <h2>Gradle user guide Version：2.3 <a href="http://www.bobingqing.com/gradle_userguide/userguide.html">点击阅读</a></h2>
 
+        <!-- UY BEGIN -->
+        <div id="uyan_frame"></div>
+        <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js"></script>
+        <!-- UY END -->
 
         <div id="disqus_thread"></div>
         <script type="text/javascript">
