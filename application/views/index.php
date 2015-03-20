@@ -8,7 +8,7 @@
         <h2>Gradle DSL Reference Version：2.3 <a href="http://www.bobingqing.com/gradle_dsl_reference/">点击阅读</a></h2>
         <h2>Gradle java doc Version：2.3 <a href="http://www.bobingqing.com/gradle_javadoc/">点击阅读</a></h2>
         <h2>Gradle groovy doc Version：2.3 <a href="http://www.bobingqing.com/gradle_groovydoc/">点击阅读</a></h2>
-        <h2>Gradle user guide Version：2.3 <a href="http://www.bobingqing.com/gradle_userguide/">点击阅读</a></h2>
+        <h2>Gradle user guide Version：2.3 <a href="http://www.bobingqing.com/gradle_userguide/userguide.html">点击阅读</a></h2>
 
 
         <div id="disqus_thread"></div>
