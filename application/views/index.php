@@ -29,7 +29,7 @@
         </script>
         <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
     
-    
+    <!-- baidu statistic -->
     <script>
     var _hmt = _hmt || [];
     (function() {
@@ -39,6 +39,11 @@
       s.parentNode.insertBefore(hm, s);
     })();
     </script>
-
+    
+    <!-- cnzz  -->
+    <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254626124'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1254626124%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    
     </body>
 </html>
